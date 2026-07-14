@@ -1,0 +1,8 @@
+langchain-groq
+langchain-text-splitters
+fastembed
+onnxruntime==1.20.1
+rank-bm25
+pymupdf
+streamlit
+python-dotenv

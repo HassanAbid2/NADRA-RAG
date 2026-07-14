@@ -1,0 +1,85 @@
+{
+  "_comment": "Starter test set. Grow this to 40-60 questions covering all 5 services. 'expected_source' = the PDF that should be retrieved (checks retrieval). 'reference_answer' = gold answer, verified manually against the PDF (checks generation). 'should_refuse' = true for out-of-scope trap questions the system must decline.",
+  "questions": [
+    {
+      "id": 1,
+      "service": "CNIC",
+      "question": "What documents are required to apply for a new CNIC?",
+      "expected_source": "registration-policy-6-0-1-english.pdf",
+      "reference_answer": "TODO: verify against the PDF",
+      "should_refuse": false
+    },
+    {
+      "id": 2,
+      "service": "CNIC",
+      "question": "How do I change the address on my CNIC?",
+      "expected_source": "cnic-modification.pdf",
+      "reference_answer": "TODO: verify against the PDF",
+      "should_refuse": false
+    },
+    {
+      "id": 3,
+      "service": "NICOP",
+      "question": "Who is eligible to apply for a NICOP?",
+      "expected_source": "new-nicop.pdf",
+      "reference_answer": "TODO: verify against the PDF",
+      "should_refuse": false
+    },
+    {
+      "id": 4,
+      "service": "POC",
+      "question": "What is a Pakistan Origin Card and who can get one?",
+      "expected_source": "new-smart-poc.pdf",
+      "reference_answer": "TODO: verify against the PDF",
+      "should_refuse": false
+    },
+    {
+      "id": 5,
+      "service": "CRC",
+      "question": "How do I register my newborn child and get a CRC?",
+      "expected_source": "new-crc-version-3-0.pdf",
+      "reference_answer": "TODO: verify against the PDF",
+      "should_refuse": false
+    },
+    {
+      "id": 6,
+      "service": "FRC",
+      "question": "What is a Family Registration Certificate and how do I obtain one?",
+      "expected_source": "frc-guide-v2.pdf",
+      "reference_answer": "TODO: verify against the PDF",
+      "should_refuse": false
+    },
+    {
+      "id": 7,
+      "service": "General",
+      "question": "How can I track the status of my application?",
+      "expected_source": "application-tracking.pdf",
+      "reference_answer": "TODO: verify against the PDF",
+      "should_refuse": false
+    },
+    {
+      "id": 8,
+      "service": "General",
+      "question": "How do I renew an expired identity card?",
+      "expected_source": "renewal-guidelines.pdf",
+      "reference_answer": "TODO: verify against the PDF",
+      "should_refuse": false
+    },
+    {
+      "id": 9,
+      "service": "OutOfScope",
+      "question": "How do I renew my Pakistani passport?",
+      "expected_source": null,
+      "reference_answer": null,
+      "should_refuse": true
+    },
+    {
+      "id": 10,
+      "service": "OutOfScope",
+      "question": "What is the weather in Islamabad today?",
+      "expected_source": null,
+      "reference_answer": null,
+      "should_refuse": true
+    }
+  ]
+}
