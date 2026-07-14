@@ -1,0 +1,9 @@
+langchain-groq
+langchain-chroma
+langchain-text-splitters
+chromadb
+fastembed
+rank-bm25
+pymupdf
+streamlit
+python-dotenv

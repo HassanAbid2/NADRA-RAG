@@ -1,0 +1,8 @@
+venv/
+.env
+data/
+pdfs_data/
+__pycache__/
+*.pyc
+__MACOSX/
+*.zip
