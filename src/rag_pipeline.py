@@ -379,11 +379,15 @@ def sources_used_by_answer(docs, answer: str) -> list[dict]:
                 for candidate in docs
                 if candidate.metadata.get("source") == source
             }
-            for page in dict.fromkeys(cited_pages):
-                if page in available_pages:
-                    sources.append({"source": source, "page": page})
-        else:
-            sources.append({"source": source, "page": None})
+            # One entry per document, pages joined — not one card per page.
+            pages = [p for p in dict.fromkeys(cited_pages) if p in available_pages]
+            if pages:
+                sources.append({
+                    "source": source,
+                    "page": ", ".join(str(p) for p in pages),
+                })
+                continue
+        sources.append({"source": source, "page": None})
     return sources
 
 
