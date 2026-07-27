@@ -17,7 +17,6 @@ import unicodedata
 from collections import Counter
 
 import fitz  # PyMuPDF
-from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
@@ -158,18 +157,13 @@ def main():
     chunks = [c for c in chunks if len(c.page_content.strip()) >= MIN_CHUNK_CHARS]
     print(f"Split into {len(chunks)} chunks (>= {MIN_CHUNK_CHARS} chars).")
 
-    if kb.CHROMA_DIR.exists():
+    if kb.VECTOR_DIR.exists():
         print("Removing old vector store ...")
-        shutil.rmtree(kb.CHROMA_DIR)
+        shutil.rmtree(kb.VECTOR_DIR)
 
     print(f"Embedding with {kb.EMBEDDING_MODEL} via ONNX (local CPU) ...")
-    Chroma.from_documents(
-        documents=chunks,
-        embedding=kb.get_embeddings(),
-        persist_directory=str(kb.CHROMA_DIR),
-        collection_name=kb.COLLECTION_NAME,
-    )
-    print(f"\nDone. Vector store persisted to {kb.CHROMA_DIR}")
+    kb.build_vectorstore(chunks)
+    print(f"\nDone. Vector store persisted to {kb.VECTOR_DIR}")
 
 
 if __name__ == "__main__":

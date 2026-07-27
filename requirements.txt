@@ -1,9 +1,9 @@
 langchain-groq
-langchain-chroma
 langchain-text-splitters
-chromadb
 fastembed
+onnxruntime==1.20.1
 rank-bm25
 pymupdf
-streamlit
+fastapi
+uvicorn[standard]
 python-dotenv
