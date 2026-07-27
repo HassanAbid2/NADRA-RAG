@@ -387,6 +387,42 @@ sourcing the missing document. Until then it is a known limitation, not a defect
 Because the daily Groq quota was exhausted during verification, these fixes are
 confirmed at the retrieval layer but a full graded re-run is still outstanding.
 
+### 7.6 Corpus coverage audit
+
+The address gap was found by accident — one gold question happened to probe it.
+To stop discovering gaps one complaint at a time, 36 common citizen questions
+deliberately *outside* the gold set were probed against the knowledge base and
+the retrieved passages read. Retrieval only, no API cost.
+
+**Result: roughly half the probes have no grounded answer.** The gaps cluster
+into five themes, which is more useful than a flat list because each theme maps
+to one or two documents worth sourcing:
+
+| Theme | Questions with no answer in the corpus |
+|---|---|
+| **Card problems** | blocked CNIC and how to unblock, rejected application, holding two CNIC numbers (the fee schedule prices "clearance of multiple identity cards" but no procedure exists) |
+| **Civil registration** | marriage registration, divorce certificate — birth and death are covered, these are not |
+| **Accessibility & special cases** | bedridden or disabled applicants, transgender registration, mobile van / home registration service |
+| **App & account support** | where to download Pak-ID, resetting an account password |
+| **Service logistics** | office opening hours (the locations dataset explicitly excludes timings), walk-in vs appointment, how to complain about an office |
+
+Complaint handling was declared out of scope in `PLAN.md`, so that one is by
+design. The rest are genuine coverage holes.
+
+The audit also found **three cases where the corpus does hold the answer but
+retrieval buried it**, which is more encouraging — they need no new documents:
+
+- *"What is Undertaking A?"* — the undertaking text is on registration policy
+  pp. 29-30 and never surfaced.
+- *"Can someone else collect my CNIC?"* — policy p25 covers collection by a
+  non-blood relative with a token slip and attested authority letter, or home
+  delivery.
+- *"How do I update my marital status?"* — policy p14 lists the requirements,
+  but **"marital status" was triggering the application-tracking boost**, the
+  same false-trigger class as `address` in §7.2. Fixed: `status` now counts as a
+  tracking signal only when it is not a card field such as marital, disability or
+  residential status. The policy page now surfaces; retrieval stays 48/48.
+
 ---
 
 ## 8. Known limitations
@@ -395,8 +431,11 @@ confirmed at the retrieval layer but a full graded re-run is still outstanding.
   generation** (§7.4, §7.5). Four are fixed; the fifth is a corpus gap. All are
   confirmed at the retrieval layer but await a graded re-run for end-to-end
   confirmation.
-- **No address-change procedure in the corpus** — the documents cover delivery
-  and voting addresses only.
+- **Corpus coverage is roughly half on common citizen questions outside the gold
+  set** (§7.6) — no address-change procedure, no blocked-card or rejected-
+  application guidance, no marriage or divorce registration, no accessibility
+  provisions, no office hours. This is now the largest single constraint on how
+  useful the assistant is, and it is a **data** problem, not an engineering one.
 - **Free-tier token quota** caps evaluation. A full 54-question graded run does
   not fit in one day's budget; the quota is per organisation, so extra keys do
   not help.
@@ -417,8 +456,11 @@ confirmed at the retrieval layer but a full graded re-run is still outstanding.
    see §7.4. The first was prompt-level; the second turned out to be retrieval.
 2. Re-run the full 54-question graded evaluation once quota allows — every fix
    in §7.4 and §7.5 is confirmed at the retrieval layer but not end to end.
-2b. Source a document covering the residential address-change procedure (§7.5),
-   closing the third data gap after locations and fees.
+2b. **Source documents for the five coverage themes in §7.6** — this is the
+   highest-value work left. Retrieval is at 100% on what the corpus contains;
+   the limit now is what the corpus does not contain. Priority order: card
+   problems (blocked / rejected / duplicate), address change, service logistics
+   (hours, walk-in), civil registration (marriage, divorce), accessibility.
 3. Rewrite and commit the Google Places collection script so the location data is
    reproducible.
 4. Spot-check the two remaining vision transcriptions against their source pages,

@@ -204,7 +204,17 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
         lowered,
     ))
 
-    if re.search(r"\b(?:track|tracking|status)\b", lowered):
+    # "marital status" / "disability status" are card FIELDS, not application
+    # status — without this guard they route to the tracking guide and bury the
+    # policy page that actually lists the change requirements.
+    if re.search(r"\b(?:track|tracking)\b", lowered) or (
+        re.search(r"\bstatus\b", lowered)
+        and not re.search(
+            r"\b(?:marital|marriage|disability|residential|citizenship|"
+            r"nationality|ajk|resident)\s+status\b",
+            lowered,
+        )
+    ):
         add("application-tracking.pdf", 0.045)
     if re.search(r"\bappointment|schedule|booking\b", lowered):
         add("appointment-scheduling.pdf", 0.045)
