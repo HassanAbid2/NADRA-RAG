@@ -190,6 +190,20 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
     def add(source: str, score: float):
         boosts[source] = max(boosts.get(source, 0.0), score)
 
+    # Two query shapes cut across every service and decide which document wins:
+    # "what does it cost / how long" belongs to the fee schedule, and "what
+    # documents do I need" belongs to the form instructions, not the app guide.
+    asks_price_or_time = bool(re.search(
+        r"\b(?:fee|fees|cost|price|charges?|timeline|processing\s+time|"
+        r"how\s+long|days|valid|validity|expire|expiry|kitni|kitna|kitne)\b",
+        lowered,
+    ))
+    asks_documents = bool(re.search(
+        r"\b(?:document|documents|required|requirement|requirements|"
+        r"dastavez|dastavaiz|chahiye)\b",
+        lowered,
+    ))
+
     if re.search(r"\b(?:track|tracking|status)\b", lowered):
         add("application-tracking.pdf", 0.045)
     if re.search(r"\bappointment|schedule|booking\b", lowered):
@@ -199,9 +213,16 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
         add("registration-policy-6-0-1-english.pdf", 0.018)
         if re.search(r"\b(?:document|documents|required|requirement)\b", lowered):
             add("registration-policy-6-0-1-english.pdf", 0.035)
-    if re.search(r"\bcnic\b", lowered) and re.search(
-        r"\b(?:new|fresh|first|make|banwa|banwane|banwana|create|apply|application|get)\b",
-        lowered,
+    if (
+        re.search(r"\bcnic\b", lowered)
+        and re.search(
+            r"\b(?:new|fresh|first|make|banwa|banwane|banwana|create|apply|"
+            r"application|get)\b",
+            lowered,
+        )
+        # "how long does a new CNIC take" is a schedule question, not a policy
+        # question; without this guard the policy doc floods every slot.
+        and not asks_price_or_time
     ):
         add("registration-policy-6-0-1-english.pdf", 0.045)
     if re.search(r"\b(?:reprint|lost|damaged)\b", lowered):
@@ -212,6 +233,10 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
         add("registration-policy-6-0-1-english.pdf", 0.012)
         if re.search(r"\b(?:fee|fees|cost|price)\b", lowered):
             add("payment-v4.pdf", 0.025)
+        # The app walkthrough shows screens; only the form instructions carry
+        # the actual "DOCUMENTS REQUIRED" checklist.
+        if asks_documents:
+            add("nicop-complete-form-with-instruction.pdf", 0.055)
     if re.search(r"\bfrc\b|family registration certificate", lowered):
         add("frc-guide-v2.pdf", 0.04)
         add("registration-policy-6-0-1-english.pdf", 0.012)
@@ -220,6 +245,8 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
     if re.search(r"\bpoc\b|pakistan origin card", lowered):
         add("new-smart-poc.pdf", 0.04)
         add("registration-policy-6-0-1-english.pdf", 0.006)
+        if asks_documents:
+            add("poc-complete-form-with-instruction.pdf", 0.055)
     if re.search(r"\bcrc\b|child registration certificate", lowered):
         add("new-crc-version-3-0.pdf", 0.04)
         add("registration-policy-6-0-1-english.pdf", 0.006)
@@ -228,11 +255,7 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
     # The authoritative itemized fee + timeline schedule lives in the dedicated
     # fee-structure sidecar, so route all fee/cost/timeline queries there.
     # It also carries the validity-period table, which lives nowhere else.
-    if re.search(
-        r"\b(?:fee|fees|cost|price|charges?|timeline|processing\s+time|"
-        r"how\s+long|days|valid|validity|expire|expiry|kitni|kitna|kitne)\b",
-        lowered,
-    ):
+    if asks_price_or_time:
         add("nadra-fee-structure.pdf", 0.06)
     # Office/branch/city-location queries — the only source with the address list
     # is NADRA_Office_Locations_Pakistan.pdf. Boost strongly so it wins even when

@@ -22,7 +22,7 @@
       "service": "CNIC",
       "question": "How do I change the address on my CNIC?",
       "expected_sources": ["cnic-modification.pdf", "cnic-modification-nonprintable-17-11-2025.pdf"],
-      "reference_answer": "An address change is done as a CNIC modification through the Pak-ID mobile app: start an ID modification application, review the pre-filled details, tap the field you want to change, complete the mandatory fields and biometric attestation, then submit and pay.",
+      "reference_answer": "KNOWN CORPUS GAP: the documents do not describe a procedure for changing the residential address printed on a CNIC. They only cover choosing a delivery address for the updated card and selecting a voting address type during a modification. A correct answer states what the documents do cover and directs the citizen to the helpline for the rest; it must NOT invent an address-change checklist.",
       "should_refuse": false
     },
     {

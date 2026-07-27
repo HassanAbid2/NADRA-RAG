@@ -348,17 +348,55 @@ retrieval on the raw question, while the live pipeline retrieves on the
 hit, and would have hidden exactly the class of bug described above. It now
 normalises identically. Retrieval remains 48/48 on the corrected path.
 
-The remaining generation failures (NICOP document list, address change,
-executive processing timeline) are unverified after these changes: the daily
-Groq quota was exhausted mid-verification, so a full graded re-run is still
-outstanding.
+### 7.5 The remaining three were also retrieval, and one was a data gap
+
+Applying the same page-level diagnosis to the last three failures found that
+**none of the five "generation" failures was actually a generation failure.**
+
+| Question | Diagnosis |
+|---|---|
+| NICOP document list | The app walkthrough (`new-nicop.pdf`) filled all five slots; the form instructions page holding the actual DOCUMENTS REQUIRED checklist never appeared. |
+| Executive processing timeline | The registration policy filled the top four slots, pushing fee-schedule page 1 — the page stating 6 days — out of context. |
+| Address change | **Not a bug. The corpus does not contain the answer.** |
+
+The first two were fixed by making two query shapes explicit in the retrieval
+boosts: a "what does it cost / how long" question belongs to the fee schedule,
+and a "what documents do I need" question belongs to the form instructions
+rather than the screen-by-screen app guide. The right pages now surface, and the
+full retrieval score is unchanged at 48/48 — the fixes did not come at the cost
+of other questions.
+
+**Gap 3 — no address-change procedure.** Searching the corpus for address
+content in the modification guides returns only three things: choosing a
+*delivery* address for the updated card, selecting a *voting* address type, and
+a pointer in the death-registration guide ("Tap here to Change address. This will
+take you to a separate process"). There is no procedure for changing the
+residential address printed on a CNIC — a common citizen question the documents
+simply do not answer.
+
+This also exposed a flaw in the gold set: the reference answer originally written
+for that question described a modification flow that is not in the documents.
+It has been rewritten to state the gap explicitly, so the correct behaviour is
+now to say what the documents cover and direct the citizen to the helpline —
+never to invent a checklist. **A gold set must be verifiable from the corpus, or
+it teaches the system to hallucinate.**
+
+This gap should be closed the same way the locations and fee gaps were: by
+sourcing the missing document. Until then it is a known limitation, not a defect.
+
+Because the daily Groq quota was exhausted during verification, these fixes are
+confirmed at the retrieval layer but a full graded re-run is still outstanding.
 
 ---
 
 ## 8. Known limitations
 
-- **Generation accuracy is the bottleneck** (§7.3). Two of the five genuine
-  failures are fixed (§7.4); three remain unverified pending API quota.
+- **All five genuine failures traced to retrieval or missing data, not
+  generation** (§7.4, §7.5). Four are fixed; the fifth is a corpus gap. All are
+  confirmed at the retrieval layer but await a graded re-run for end-to-end
+  confirmation.
+- **No address-change procedure in the corpus** — the documents cover delivery
+  and voting addresses only.
 - **Free-tier token quota** caps evaluation. A full 54-question graded run does
   not fit in one day's budget; the quota is per organisation, so extra keys do
   not help.
@@ -377,8 +415,10 @@ outstanding.
 
 1. ~~Fix the trap-refusal failure and the Roman Urdu fee question~~ — **done**,
    see §7.4. The first was prompt-level; the second turned out to be retrieval.
-2. Re-run the full 54-question graded evaluation once quota allows, to confirm
-   those two fixes and re-check the three unverified generation failures.
+2. Re-run the full 54-question graded evaluation once quota allows — every fix
+   in §7.4 and §7.5 is confirmed at the retrieval layer but not end to end.
+2b. Source a document covering the residential address-change procedure (§7.5),
+   closing the third data gap after locations and fees.
 3. Rewrite and commit the Google Places collection script so the location data is
    reproducible.
 4. Spot-check the two remaining vision transcriptions against their source pages,
