@@ -5,6 +5,7 @@ embedding model and collection settings can never drift apart.
 """
 
 import json
+import math
 import re
 from pathlib import Path
 
@@ -151,6 +152,75 @@ _STOPWORDS = {
 _SUFFIXES = ("ments", "ment", "tions", "tion", "ings", "ing", "ies", "es", "ed", "al", "s")
 
 
+_QUERY_EXPANSIONS = (
+    (r"\b(?:renew|renewal|tajdeed)\b", "renewal renew identity card application steps"),
+    (r"\b(?:track|tracking|status)\b", "application tracking ID PIN status"),
+    (r"\b(?:fee|fees|cost|price)\b", "fee fees payment cost"),
+    (r"\b(?:banwana|banwane|apply|application)\b", "apply application process steps"),
+    (r"\b(?:kaise|kesay|kese|how)\b", "how process steps"),
+    (r"\b(?:eligible|eligibility|kaun|kon)\b", "eligible eligibility requirements"),
+)
+
+
+def _expand_query(query: str) -> str:
+    """Add English retrieval terms for common Roman Urdu and intent phrases."""
+    additions = [
+        expansion
+        for pattern, expansion in _QUERY_EXPANSIONS
+        if re.search(pattern, query, re.IGNORECASE)
+    ]
+    return " ".join([query, *additions])
+
+
+def _intent_source_boosts(query: str) -> dict[str, float]:
+    """Prioritize the official guide that directly matches the user's intent."""
+    lowered = query.lower()
+    boosts: dict[str, float] = {}
+
+    def add(source: str, score: float):
+        boosts[source] = max(boosts.get(source, 0.0), score)
+
+    if re.search(r"\b(?:track|tracking|status)\b", lowered):
+        add("application-tracking.pdf", 0.045)
+    if re.search(r"\bappointment|schedule|booking\b", lowered):
+        add("appointment-scheduling.pdf", 0.045)
+    if re.search(r"\b(?:renew|renewal|tajdeed)\b", lowered):
+        add("renewal-guidelines.pdf", 0.045)
+        add("registration-policy-6-0-1-english.pdf", 0.018)
+        if re.search(r"\b(?:document|documents|required|requirement)\b", lowered):
+            add("registration-policy-6-0-1-english.pdf", 0.035)
+    if re.search(r"\b(?:reprint|lost|damaged)\b", lowered):
+        add("reprint-guide.pdf", 0.045)
+    if re.search(r"\bnicop\b", lowered):
+        add("new-nicop.pdf", 0.035)
+        add("nicop-complete-form-with-instruction.pdf", 0.025)
+        add("registration-policy-6-0-1-english.pdf", 0.012)
+        if re.search(r"\b(?:fee|fees|cost|price)\b", lowered):
+            add("payment-v4.pdf", 0.025)
+    if re.search(r"\bfrc\b|family registration certificate", lowered):
+        add("frc-guide-v2.pdf", 0.04)
+        add("registration-policy-6-0-1-english.pdf", 0.012)
+        if re.search(r"\b(?:eligible|eligibility|kaun|kon)\b", lowered):
+            add("registration-policy-6-0-1-english.pdf", 0.065)
+    if re.search(r"\bpoc\b|pakistan origin card", lowered):
+        add("new-smart-poc.pdf", 0.04)
+        add("registration-policy-6-0-1-english.pdf", 0.006)
+    if re.search(r"\bcrc\b|child registration certificate", lowered):
+        add("new-crc-version-3-0.pdf", 0.04)
+        add("registration-policy-6-0-1-english.pdf", 0.006)
+    if re.search(r"\b(?:payment|pay|raast|easypaisa|jazzcash)\b", lowered):
+        add("payment-v4.pdf", 0.045)
+    if re.search(r"\bphoto|photograph\b", lowered):
+        add("photgraph-guidelines-v4.pdf", 0.04)
+        add("photo-guidelines.pdf", 0.04)
+    if re.search(r"\bfingerprint|biometric\b", lowered):
+        add("fingerprint-guidelines-v11.pdf", 0.04)
+        add("fingerprint-guidelines.pdf", 0.04)
+    if re.search(r"\bupload\b.*\bdocument|\bdocument\b.*\bupload", lowered):
+        add("upload-document-guide.pdf", 0.045)
+    return boosts
+
+
 def _tokenize(text: str) -> list[str]:
     """Lowercase words minus stopwords, crudely stemmed so that query terms
     like "renew"/"documents" match document terms "renewal"/"document"."""
@@ -184,9 +254,10 @@ class HybridRetriever:
 
     def search(self, query: str, k: int = 5) -> list[Document]:
         fetch_k = max(4 * k, 20)
+        expanded_query = _expand_query(query)
 
-        vector_docs = get_vectorstore().similarity_search(query, k=fetch_k)
-        bm25_scores = self._bm25.get_scores(_tokenize(query))
+        vector_docs = get_vectorstore().similarity_search(expanded_query, k=fetch_k)
+        bm25_scores = self._bm25.get_scores(_tokenize(expanded_query))
         bm25_order = sorted(range(len(self._docs)), key=lambda i: -bm25_scores[i])
         bm25_docs = [self._docs[i] for i in bm25_order[:fetch_k] if bm25_scores[i] > 0]
 
@@ -196,8 +267,69 @@ class HybridRetriever:
                 key = doc.page_content[:200]
                 score = fused.get(key, (0.0, doc))[0] + 1.0 / (60 + rank)
                 fused[key] = (score, doc)
+
+        source_boosts = _intent_source_boosts(query)
+        focus_terms = [
+            term
+            for term in ("cnic", "nicop", "frc", "poc", "crc")
+            if re.search(rf"\b{term}\b", query, re.IGNORECASE)
+        ]
+
+        # Ensure intent-matched documents participate even when a short or
+        # Roman-Urdu query leaves their chunks just outside the global top-N.
+        for source, boost in source_boosts.items():
+            source_indices = [
+                index
+                for index, doc in enumerate(self._docs)
+                if str(doc.metadata.get("source", "")).lower() == source
+            ]
+            source_indices.sort(key=lambda index: -bm25_scores[index])
+            for source_rank, index in enumerate(source_indices[: max(3, k)]):
+                doc = self._docs[index]
+                key = doc.page_content[:200]
+                base_score = fused.get(key, (0.0, doc))[0]
+                lexical_bonus = 1.0 / (80 + source_rank)
+                fused[key] = (base_score + lexical_bonus, doc)
+
+        for key, (score, doc) in list(fused.items()):
+            source = str(doc.metadata.get("source", "")).lower()
+            source_boost = source_boosts.get(source, 0.0)
+            if (
+                source == "registration-policy-6-0-1-english.pdf"
+                and focus_terms
+                and not any(
+                    re.search(rf"\b{term}\b", doc.page_content, re.IGNORECASE)
+                    for term in focus_terms
+                )
+            ):
+                source_boost *= 0.2
+            score += source_boost
+            fused[key] = (score, doc)
+
         ranked = sorted(fused.values(), key=lambda pair: -pair[0])
-        return [doc for _, doc in ranked[:k]]
+        max_per_source = max(3, math.ceil(k * 0.67))
+        selected = []
+        source_counts: dict[str, int] = {}
+        selected_keys = set()
+        for _, doc in ranked:
+            source = str(doc.metadata.get("source", ""))
+            if source_counts.get(source, 0) >= max_per_source:
+                continue
+            key = doc.page_content[:200]
+            selected.append(doc)
+            selected_keys.add(key)
+            source_counts[source] = source_counts.get(source, 0) + 1
+            if len(selected) == k:
+                return selected
+
+        for _, doc in ranked:
+            key = doc.page_content[:200]
+            if key not in selected_keys:
+                selected.append(doc)
+                selected_keys.add(key)
+            if len(selected) == k:
+                break
+        return selected
 
 
 _retriever = None

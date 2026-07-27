@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Document-grounded guidance for NADRA identity services."
+    />
+    <meta name="theme-color" content="#073f2d" />
+    <title>NADRA Guide | AI Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Chat controls">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">PK</div>
+          <div>
+            <div class="brand-name">NADRA Guide</div>
+            <div class="brand-subtitle">AI information assistant</div>
+          </div>
+        </div>
+
+        <div class="sidebar-section">
+          <p class="side-label">Try asking</p>
+          <div class="examples" id="examples"></div>
+        </div>
+
+        <div class="sidebar-section conversation-section">
+          <p class="side-label">Conversation</p>
+          <button class="new-chat" id="new-chat" type="button">
+            <span aria-hidden="true">＋</span>
+            Start a new chat
+          </button>
+        </div>
+
+        <div class="privacy-note">
+          <span class="privacy-icon" aria-hidden="true">◆</span>
+          <div>
+            <strong>Privacy reminder</strong>
+            <p>Do not share CNIC numbers, passwords, biometric data, or other sensitive information.</p>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="mobile-header">
+          <button
+            class="menu-button"
+            id="menu-button"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+          >
+            <span></span><span></span><span></span>
+          </button>
+          <div class="mobile-brand">NADRA Guide</div>
+          <div class="status-dot" title="Service online" aria-label="Service online"></div>
+        </header>
+
+        <div class="content">
+          <section class="hero" id="hero">
+            <div class="hero-copy">
+              <div class="eyebrow">
+                <span aria-hidden="true"></span>
+                Document-grounded answers
+              </div>
+              <h1>Identity services,<br /><em>explained simply.</em></h1>
+              <p>
+                Clear guidance for documents, eligibility, fees, timelines, and
+                application procedures—in English, اردو, or Roman Urdu.
+              </p>
+              <div class="service-row" aria-label="Supported services">
+                <span>CNIC</span><span>NICOP</span><span>POC</span>
+                <span>CRC</span><span>FRC</span>
+              </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+              <div class="crescent"></div>
+              <div class="spark spark-one">✦</div>
+              <div class="spark spark-two">✦</div>
+              <div class="id-card">
+                <div class="card-top">
+                  <div class="card-chip"></div>
+                  <div class="card-wordmark">PAKISTAN</div>
+                </div>
+                <div class="card-body">
+                  <div class="portrait"></div>
+                  <div class="card-lines">
+                    <span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="welcome-grid" id="welcome" aria-label="Assistant features">
+            <article>
+              <div class="feature-icon">اA</div>
+              <div><strong>Multilingual</strong><span>Ask naturally in your preferred language.</span></div>
+            </article>
+            <article>
+              <div class="feature-icon">▤</div>
+              <div><strong>Source-aware</strong><span>See the document and page behind every answer.</span></div>
+            </article>
+            <article>
+              <div class="feature-icon">↗</div>
+              <div><strong>Clear guidance</strong><span>Get focused help across identity services.</span></div>
+            </article>
+          </section>
+
+          <section
+            class="messages"
+            id="messages"
+            aria-live="polite"
+            aria-label="Conversation"
+          ></section>
+        </div>
+
+        <div class="composer-wrap">
+          <form class="composer" id="chat-form">
+            <label class="sr-only" for="question">Ask about a NADRA service</label>
+            <textarea
+              id="question"
+              name="question"
+              rows="1"
+              maxlength="2000"
+              placeholder="Ask about a NADRA service…"
+              autocomplete="off"
+              required
+            ></textarea>
+            <button class="send-button" id="send-button" type="submit" aria-label="Send question">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </button>
+          </form>
+          <div class="composer-meta">
+            <p>Answers use the available official documents. Verify critical information with NADRA.</p>
+            <span><kbd>Enter</kbd> to send · <kbd>Shift</kbd> + <kbd>Enter</kbd> for a new line</span>
+          </div>
+        </div>
+      </main>
+    </div>
+    <div class="sidebar-scrim" id="sidebar-scrim"></div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
