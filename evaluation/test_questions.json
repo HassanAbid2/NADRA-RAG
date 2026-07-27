@@ -1,84 +1,436 @@
 {
-  "_comment": "Starter test set. Grow this to 40-60 questions covering all 5 services. 'expected_source' = the PDF that should be retrieved (checks retrieval). 'reference_answer' = gold answer, verified manually against the PDF (checks generation). 'should_refuse' = true for out-of-scope trap questions the system must decline.",
+  "_comment": "Gold evaluation set. 'expected_sources' = documents that genuinely contain the answer (retrieval scores a hit if ANY appears in the top-k). 'reference_answer' = verified against the actual corpus text, not invented. 'should_refuse' = out-of-scope trap the system must decline.",
   "questions": [
     {
       "id": 1,
       "service": "CNIC",
       "question": "What documents are required to apply for a new CNIC?",
-      "expected_source": "registration-policy-6-0-1-english.pdf",
-      "reference_answer": "TODO: verify against the PDF",
+      "expected_sources": ["registration-policy-6-0-1-english.pdf"],
+      "reference_answer": "For a resident citizen with a blood relative: application by the applicant, identity card number of parent(s) or blood relative(s), verified computerized birth certificate from UC / Municipal Committee / Cantonment (or citizenship / naturalization certificate), and biometric verification of the parent or blood relative or attestation of the CNICF. Applicants with no blood relative follow the system-independent route, which substitutes a biometric witness.",
       "should_refuse": false
     },
     {
       "id": 2,
       "service": "CNIC",
-      "question": "How do I change the address on my CNIC?",
-      "expected_source": "cnic-modification.pdf",
-      "reference_answer": "TODO: verify against the PDF",
+      "question": "What documents do I need to renew my CNIC?",
+      "expected_sources": ["registration-policy-6-0-1-english.pdf", "renewal-guidelines.pdf"],
+      "reference_answer": "A resident citizen needs only the application and the CNIC / NICOP / CRC / Juvenile card number - no other document is required and no attestation is needed. A non-resident additionally needs a Pakistani or foreign passport, or residence permit, or travel document, or Undertaking \"A\" attested by the Pakistan Embassy / mission.",
       "should_refuse": false
     },
     {
       "id": 3,
-      "service": "NICOP",
-      "question": "Who is eligible to apply for a NICOP?",
-      "expected_source": "new-nicop.pdf",
-      "reference_answer": "TODO: verify against the PDF",
+      "service": "CNIC",
+      "question": "How do I change the address on my CNIC?",
+      "expected_sources": ["cnic-modification.pdf", "cnic-modification-nonprintable-17-11-2025.pdf"],
+      "reference_answer": "An address change is done as a CNIC modification through the Pak-ID mobile app: start an ID modification application, review the pre-filled details, tap the field you want to change, complete the mandatory fields and biometric attestation, then submit and pay.",
       "should_refuse": false
     },
     {
       "id": 4,
-      "service": "POC",
-      "question": "What is a Pakistan Origin Card and who can get one?",
-      "expected_source": "new-smart-poc.pdf",
-      "reference_answer": "TODO: verify against the PDF",
+      "service": "CNIC",
+      "question": "How do I convert my old CNIC to a Smart Card?",
+      "expected_sources": ["conversion-to-smartid.pdf"],
+      "reference_answer": "Using the Pak-ID mobile app you can convert identity documents such as a CRC, ID card or Smart NICOP into a Smart ID card. Tap the ID card option under ID Documents, choose the Conversion application type, and follow the guided steps; biometric verification by an attester is mandatory to proceed.",
       "should_refuse": false
     },
     {
       "id": 5,
-      "service": "CRC",
-      "question": "How do I register my newborn child and get a CRC?",
-      "expected_source": "new-crc-version-3-0.pdf",
-      "reference_answer": "TODO: verify against the PDF",
+      "service": "CNIC",
+      "question": "What is the validity period of a Smart CNIC for adults?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "CNIC and Smart CNIC / NICOP for adults are valid for 10 years.",
       "should_refuse": false
     },
     {
       "id": 6,
-      "service": "FRC",
-      "question": "What is a Family Registration Certificate and how do I obtain one?",
-      "expected_source": "frc-guide-v2.pdf",
-      "reference_answer": "TODO: verify against the PDF",
+      "service": "CNIC",
+      "question": "How do I get a duplicate CNIC if I lost my card?",
+      "expected_sources": ["reprint-guide.pdf"],
+      "reference_answer": "Use the Reprint process in the NADRA Pak-ID app to replace a lost or broken identity card: tap the ID card option under ID Documents, select Reprint as the application type, and follow the guided steps.",
       "should_refuse": false
     },
     {
       "id": 7,
-      "service": "General",
-      "question": "How can I track the status of my application?",
-      "expected_source": "application-tracking.pdf",
-      "reference_answer": "TODO: verify against the PDF",
+      "service": "CNIC",
+      "question": "How can I modify my date of birth on my CNIC?",
+      "expected_sources": ["cnic-modification.pdf", "cnic-modification-nonprintable-17-11-2025.pdf", "nadra-fee-structure.pdf"],
+      "reference_answer": "A date-of-birth change is processed as an ID modification in the Pak-ID app. Age modification carries its own processing fee, which depends on the size of the change: up to 1 year Rs. 1,000 inland (USD 15 abroad), 1-2 years Rs. 2,000 (USD 25), 2-3 years Rs. 3,000 (USD 40), more than 3 years Rs. 5,000 (USD 65), and a second time age change Rs. 10,000 (USD 125).",
       "should_refuse": false
     },
     {
       "id": 8,
-      "service": "General",
-      "question": "How do I renew an expired identity card?",
-      "expected_source": "renewal-guidelines.pdf",
-      "reference_answer": "TODO: verify against the PDF",
+      "service": "CNIC",
+      "question": "What is the fee for a new CNIC?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "A new CNIC is free in the Normal category (Rs. 0/-) and takes 15 days. Urgent costs Rs. 1,150/- and takes 12 days; Executive costs Rs. 2,150/- and takes 6 days.",
       "should_refuse": false
     },
     {
       "id": 9,
-      "service": "OutOfScope",
-      "question": "How do I renew my Pakistani passport?",
-      "expected_source": null,
-      "reference_answer": null,
-      "should_refuse": true
+      "service": "NICOP",
+      "question": "How do I apply for a new NICOP through the Pak-ID app?",
+      "expected_sources": ["new-nicop.pdf"],
+      "reference_answer": "After logging into the NADRA Pak-ID app, tap the ID Card option to apply for a new Smart NICOP. Specify whether the application is for yourself or a blood relative, complete the personal, birth and address details, capture fingerprints for both hands and thumbs, and complete biometric attestation by a designated attester before submitting.",
+      "should_refuse": false
     },
     {
       "id": 10,
-      "service": "OutOfScope",
+      "service": "NICOP",
+      "question": "What documents are required for a NICOP application?",
+      "expected_sources": ["nicop-complete-form-with-instruction.pdf", "registration-policy-6-0-1-english.pdf"],
+      "reference_answer": "Bank receipt, two recent photographs, a clear photocopy of a valid Pakistani passport, a photocopy of the foreign passport (dual nationals only), a clear photocopy of the Pakistani B-Form / CRC / MNIC / CNIC / NICOP if available, a copy of the spouse's or parent's identity document, a birth certificate for first-time registration, and a marriage certificate for first-time registration as a married person.",
+      "should_refuse": false
+    },
+    {
+      "id": 11,
+      "service": "NICOP",
+      "question": "Who is eligible to apply for a NICOP?",
+      "expected_sources": ["nicop-complete-form-with-instruction.pdf", "registration-policy-6-0-1-english.pdf"],
+      "reference_answer": "NICOP is issued to Pakistani citizens living abroad or intending to live abroad, in four categories: emigrants / those employed abroad, dual nationality holders, holders of a resident or immigrant visa, and those residing or intending to reside abroad for more than six months (including dependents, OPF members and others travelling for business or visit).",
+      "should_refuse": false
+    },
+    {
+      "id": 12,
+      "service": "NICOP",
+      "question": "Which countries qualify for gratis or discounted NICOP?",
+      "expected_sources": ["nicop-complete-form-with-instruction.pdf"],
+      "reference_answer": "SNICOP is valid for 10 years on payment of US$ 20 (or local equivalent) for Pakistanis living in nine countries: Iran, Libya, Syria, Yemen, Iraq, India, Nigeria, Nepal and Sudan. Gratis processing applies to authorised staff posted in Pakistan missions abroad, and government servants on duty or training abroad plus their accompanying dependants are exempt from the fee.",
+      "should_refuse": false
+    },
+    {
+      "id": 13,
+      "service": "NICOP",
+      "question": "What is the fee for a new Smart NICOP in the USA?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "The USA falls in Zone A. A new Smart NICOP costs USD 39/- Normal (31 days), USD 57/- Urgent (23 days), or USD 75/- Executive (9 days).",
+      "should_refuse": false
+    },
+    {
+      "id": 14,
+      "service": "NICOP",
+      "question": "What is the NICOP fee in the Middle East?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "The Middle East falls in Zone B. A new Smart NICOP costs USD 20/- Normal (31 days), USD 30/- Urgent (23 days), or USD 40/- Executive (9 days).",
+      "should_refuse": false
+    },
+    {
+      "id": 15,
+      "service": "NICOP",
+      "question": "How long is a Smart NICOP valid for an adult?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "10 years for adults. Smart NICOP for minors is also 10 years, except for minors below 14 years of age where it is 10 years or until age 18, whichever comes first.",
+      "should_refuse": false
+    },
+    {
+      "id": 16,
+      "service": "POC",
+      "question": "Who is eligible for a Pakistan Origin Card?",
+      "expected_sources": ["registration-policy-6-0-1-english.pdf", "poc-complete-form-with-instruction.pdf", "new-smart-poc.pdf"],
+      "reference_answer": "POC is issued to foreigners of Pakistani origin under Section 11 of the NADRA Ordinance 2000 and the POC Rules 2002. The grounds for claiming a POC are: ex-Pakistani, parents or grandparents based, spouse based, and office mistake. A Bangladeshi national is not eligible, and the applicant must not be a citizen of India, Israel, an enemy country, or a state not recognised by Pakistan.",
+      "should_refuse": false
+    },
+    {
+      "id": 17,
+      "service": "POC",
+      "question": "What documents are required for a POC application?",
+      "expected_sources": ["poc-complete-form-with-instruction.pdf", "registration-policy-6-0-1-english.pdf"],
+      "reference_answer": "Bank receipt, two recent photographs (35x45 mm), an attested photocopy of the foreign passport or another document showing the link with parents, the applicant's Pakistani identity documents such as a birth certificate or NIC, an attested copy of the marriage certificate where applicable, and the original CNIC / CRC / NICOP if held.",
+      "should_refuse": false
+    },
+    {
+      "id": 18,
+      "service": "POC",
+      "question": "What is the fee for a new POC?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "A new Smart POC costs USD 150/- Normal (31 days), USD 200/- Urgent (23 days), or USD 250/- Executive (9 days).",
+      "should_refuse": false
+    },
+    {
+      "id": 19,
+      "service": "POC",
+      "question": "How long is a spouse-based Smart POC valid?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "A spouse-based Smart POC is valid for 5 years. Smart POC issued on ex-Pakistani, parents-based or FPO family-member grounds is valid for 7 years.",
+      "should_refuse": false
+    },
+    {
+      "id": 20,
+      "service": "POC",
+      "question": "What is the fee to cancel a POC due to divorce?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "POC cancellation due to divorce costs USD 25/- in the Executive category and takes 2 days.",
+      "should_refuse": false
+    },
+    {
+      "id": 21,
+      "service": "CRC",
+      "question": "How do I register the birth of my child with NADRA?",
+      "expected_sources": ["birth-registration.pdf"],
+      "reference_answer": "Use the birth registration flow in the Pak-ID app: enter the registration office details and exact date of birth, calculate the fee, then provide the child's details, both parents' details (citizen numbers and full names), and family linkage information such as the paternal grandfather's citizen number and the doctor or midwife's name, before submitting.",
+      "should_refuse": false
+    },
+    {
+      "id": 22,
+      "service": "CRC",
+      "question": "What is a Child Registration Certificate and how do I get one?",
+      "expected_sources": ["new-crc-version-3-0.pdf", "registration-policy-6-0-1-english.pdf"],
+      "reference_answer": "Registration of citizens under 18 is carried out under Section 9 of the NADRA Ordinance 2000, and every parent or guardian is bound to register a minor within one month of birth. The minor is issued an ID number on a certificate called the Child Registration Certificate (CRC). Apply through the CRC option in the Pak-ID app by adding the minor with their birth certificate number and completing the application.",
+      "should_refuse": false
+    },
+    {
+      "id": 23,
+      "service": "CRC",
+      "question": "What is the fee for a CRC?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "A CRC (all categories) costs PKR 50/- in the Normal category and takes 7 days, or PKR 500/- in the Executive category and takes 1 day. Urgent is not applicable.",
+      "should_refuse": false
+    },
+    {
+      "id": 24,
+      "service": "CRC",
+      "question": "Until what age is a CRC valid?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "A CRC is valid until the child attains the age of 3, 10 or 18 years.",
+      "should_refuse": false
+    },
+    {
+      "id": 25,
+      "service": "FRC",
+      "question": "How do I get a Family Registration Certificate?",
+      "expected_sources": ["frc-guide-v2.pdf"],
+      "reference_answer": "In the Pak-ID app, scroll to the Family section on the home page and tap FRC or Family Composition. Choose the FRC certificate type, review the fee summary, and submit. You are notified when the application is approved, and the FRC then appears in the Applications section of the app; progress can be tracked under Under Process Applications.",
+      "should_refuse": false
+    },
+    {
+      "id": 26,
+      "service": "FRC",
+      "question": "What is the fee for an FRC?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "An FRC for an Alpha / Beta / Gama family costs PKR 1,000/- in the Executive category and takes 1 day. An FRC for Both costs PKR 2,000/- Executive, also 1 day. Normal and Urgent categories are not applicable.",
+      "should_refuse": false
+    },
+    {
+      "id": 27,
+      "service": "FRC",
+      "question": "How long does it take to get an FRC?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "One day. FRC is only offered in the Executive category, which is processed in 1 day.",
+      "should_refuse": false
+    },
+    {
+      "id": 28,
+      "service": "Fees",
+      "question": "What is the fee to renew a CNIC?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "CNIC renewal costs Rs. 400/- Normal (15 days), Rs. 1,150/- Urgent (12 days), or Rs. 2,150/- Executive (6 days). Smart NIC renewal costs Rs. 750/- Normal (31 days), Rs. 1,500/- Urgent (23 days), or Rs. 2,500/- Executive (9 days).",
+      "should_refuse": false
+    },
+    {
+      "id": 29,
+      "service": "Fees",
+      "question": "How much does an urgent CNIC modification cost and how long does it take?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "An urgent CNIC modification costs Rs. 1,150/- and is processed in 12 days.",
+      "should_refuse": false
+    },
+    {
+      "id": 30,
+      "service": "Fees",
+      "question": "What are the delivery charges for an ID card within Pakistan?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "PKR 165/- for delivery within Pakistan. Delivery abroad varies from country to country.",
+      "should_refuse": false
+    },
+    {
+      "id": 31,
+      "service": "Fees",
+      "question": "How much does it cost to change my age by more than 3 years?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "An age change of more than 3 years costs Rs. 5,000/- inland or USD 65/- abroad.",
+      "should_refuse": false
+    },
+    {
+      "id": 32,
+      "service": "Fees",
+      "question": "What is the fee for a succession certificate for assets worth more than 100,000?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "For an asset worth equal to or more than Rs. 100,000, a new / fresh succession certificate application costs Rs. 20,000/- (Rs. 22,000/- in Sindh). A duplicate or amended application costs Rs. 5,000/-, a decline on a processed application costs Rs. 15,000/-, and office mistake is free of cost.",
+      "should_refuse": false
+    },
+    {
+      "id": 33,
+      "service": "Fees",
+      "question": "How long does executive processing take for a new CNIC?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "Six days. Executive processing for a new CNIC costs Rs. 2,150/- and is completed in 6 days.",
+      "should_refuse": false
+    },
+    {
+      "id": 34,
+      "service": "General",
+      "question": "How do I book an appointment at a NADRA office?",
+      "expected_sources": ["appointment-scheduling.pdf"],
+      "reference_answer": "In the Pak-ID app open the appointment screen, which shows your existing appointments, and tap Book Appointment. Select your location, choose the relevant NADRA centre, and confirm the appointment.",
+      "should_refuse": false
+    },
+    {
+      "id": 35,
+      "service": "General",
+      "question": "How can I pay the fee for my online application?",
+      "expected_sources": ["payment-v4.pdf"],
+      "reference_answer": "On the payment screen you can pay by credit or debit card, Raast ID, or a mobile wallet such as Easypaisa or JazzCash. After the payment is processed, press Verify Payment to continue with the application.",
+      "should_refuse": false
+    },
+    {
+      "id": 36,
+      "service": "General",
+      "question": "How do I track the status of my application?",
+      "expected_sources": ["application-tracking.pdf"],
+      "reference_answer": "In the Pak-ID app go to the Applications section and select Tracking. Enter the Tracking ID you received when submitting the application together with its PIN code, then tap Get Details. The current status is shown at the top along with a chronological list of milestones and their dates.",
+      "should_refuse": false
+    },
+    {
+      "id": 37,
+      "service": "General",
+      "question": "What are the photograph requirements for my application?",
+      "expected_sources": ["photo-guidelines.pdf", "photgraph-guidelines-v4.pdf"],
+      "reference_answer": "The photograph must be taken against a white or plain background with dimensions not less than 350 x 467, must be no older than 6 months, taken looking straight into the camera in sharp focus, and be high quality with no ink marks or creases. Black and white photographs are not accepted, and no hats, artificial lenses, glasses, shadows or hair may obscure the face.",
+      "should_refuse": false
+    },
+    {
+      "id": 38,
+      "service": "General",
+      "question": "How do I cancel the ID card of a family member who passed away?",
+      "expected_sources": ["id-cancellation-death.pdf", "registration-policy-6-0-1-english.pdf"],
+      "reference_answer": "In the Pak-ID app tap the ID Cancellation option to cancel the identity document of a deceased relative. Cancellation is made under Section 17 of the NADRA Ordinance 2000; the application may be made by any blood relative or the spouse, and a cancellation certificate is then issued.",
+      "should_refuse": false
+    },
+    {
+      "id": 39,
+      "service": "General",
+      "question": "What is a proof of life certificate and who needs it?",
+      "expected_sources": ["proof-of-life-certificate.pdf"],
+      "reference_answer": "A Proof of Life Certificate is applied for through the Pak-ID app by tapping Proof of Life under Biometrics. You can apply for yourself or for blood relatives, and after successful biometric verification the certificate is submitted and becomes available in the ID Vault under My Documents.",
+      "should_refuse": false
+    },
+    {
+      "id": 40,
+      "service": "General",
+      "question": "How do I upload documents for my online application?",
+      "expected_sources": ["upload-document-guide.pdf"],
+      "reference_answer": "Obtain the Tracking ID and PIN from the Applications or Under Process Applications screen and enter them, then tap Get Details. The screen lists the supporting documents required; tap the green arrow next to a document and either Browse to pick a file from the device or Capture to photograph it, crop and save, then tap Upload.",
+      "should_refuse": false
+    },
+    {
+      "id": 41,
+      "service": "Locations",
+      "question": "Where are the NADRA offices in Lahore?",
+      "expected_sources": ["NADRA_Office_Locations_Pakistan.pdf"],
+      "reference_answer": "Lahore has 10 listed locations, including NADRA Office NRC DHA (Sector G, DHA Phase 1), NADRA Mega PECO Road (Block 10), NADRA Mega Center near Egerton Road (Garhi Shahu), NADRA Office NRC DHA Phase IV, NADRA Regional Head Office Lahore (Trade Centre, Aitchison Society), Nadra Mega Center DGBT (Sanda Road), NADRA Registration Centre LCCI, Mohlanwal, NADRA ZSR Cantt and NADRA Registration Office Defence Road.",
+      "should_refuse": false
+    },
+    {
+      "id": 42,
+      "service": "Locations",
+      "question": "Is there a NADRA office in Bahawalpur?",
+      "expected_sources": ["NADRA_Office_Locations_Pakistan.pdf"],
+      "reference_answer": "Yes - Bahawalpur has 4 listed locations: Nadra Office Bahawalpur (Model Town A), NADRA Executive Office Bahawalpur (Noor Mahal Road, Trust Colony), NADRA Office CCIB Bahawalpur (Sharifabad, Basti Muradshah), and E-Khidmat Markaz Bahawalpur (near Kacheri, Bahawalpur Cantt).",
+      "should_refuse": false
+    },
+    {
+      "id": 43,
+      "service": "Locations",
+      "question": "What is the NADRA helpline number?",
+      "expected_sources": ["NADRA_Office_Locations_Pakistan.pdf"],
+      "reference_answer": "051-111-786-100 is NADRA's national helpline, the number NADRA directs citizens to use regardless of which branch they are contacting.",
+      "should_refuse": false
+    },
+    {
+      "id": 44,
+      "service": "Locations",
+      "question": "Which NADRA centers are in Karachi?",
+      "expected_sources": ["NADRA_Office_Locations_Pakistan.pdf"],
+      "reference_answer": "Karachi has 10 listed locations, including NADRA Mega Centre EAST (Main University Road, Gulzar-e-Hijri), NADRA NRC Executive Shahrah-e-Quaideen (Tariq Road, P.E.C.H.S.), NADRA Mega Center North Nazimabad (Euro Twin Tower, Block L), NADRA Mega Center DHA (Main Korangi Road, DHA Phase 1) and NADRA Registration Center Shah Faisal.",
+      "should_refuse": false
+    },
+    {
+      "id": 45,
+      "service": "Multilingual",
+      "question": "CNIC renew karne ke liye kya documents chahiye?",
+      "expected_sources": ["registration-policy-6-0-1-english.pdf", "renewal-guidelines.pdf"],
+      "reference_answer": "Resident shehri ke liye sirf darkhwast aur CNIC / NICOP / CRC / Juvenile card number darkar hai - koi aur dastavez zaroori nahi aur attestation ki zaroorat nahi. Non-resident ko iske saath Pakistani ya foreign passport, ya residence permit, ya travel document, ya Pakistan Embassy se attested Undertaking \"A\" dena hoga.",
+      "should_refuse": false
+    },
+    {
+      "id": 46,
+      "service": "Multilingual",
+      "question": "Naya CNIC banwane ki fees kitni hai?",
+      "expected_sources": ["nadra-fee-structure.pdf"],
+      "reference_answer": "Naya CNIC Normal category mein muft hai (Rs. 0/-) aur 15 din mein banta hai. Urgent ki fees Rs. 1,150/- hai (12 din) aur Executive ki fees Rs. 2,150/- hai (6 din).",
+      "should_refuse": false
+    },
+    {
+      "id": 47,
+      "service": "Multilingual",
+      "question": "Lahore mein NADRA ka office kahan hai?",
+      "expected_sources": ["NADRA_Office_Locations_Pakistan.pdf"],
+      "reference_answer": "Lahore mein 10 daftar darj hain, jin mein NADRA Office NRC DHA (DHA Phase 1), NADRA Mega PECO Road (Block 10), NADRA Mega Center Egerton Road ke qareeb (Garhi Shahu), NADRA Regional Head Office (Trade Centre, Aitchison Society) aur NADRA ZSR Cantt shamil hain.",
+      "should_refuse": false
+    },
+    {
+      "id": 48,
+      "service": "Multilingual",
+      "question": "FRC kaise banwate hain?",
+      "expected_sources": ["frc-guide-v2.pdf"],
+      "reference_answer": "Pak-ID app mein home page par Family section tak jayen aur FRC ya Family Composition par tap karen. FRC certificate ki qisam muntakhib karen, fee summary dekhen aur darkhwast jama karwayen. Manzoori ke baad FRC app ke Applications section mein mil jayega.",
+      "should_refuse": false
+    },
+    {
+      "id": 49,
+      "service": "Trap",
+      "question": "How do I renew my Pakistani passport?",
+      "expected_sources": [],
+      "reference_answer": "",
+      "should_refuse": true
+    },
+    {
+      "id": 50,
+      "service": "Trap",
+      "question": "What is the fee for a Pakistani driving licence?",
+      "expected_sources": [],
+      "reference_answer": "",
+      "should_refuse": true
+    },
+    {
+      "id": 51,
+      "service": "Trap",
+      "question": "How do I apply for a visa to the United Kingdom?",
+      "expected_sources": [],
+      "reference_answer": "",
+      "should_refuse": true
+    },
+    {
+      "id": 52,
+      "service": "Trap",
       "question": "What is the weather in Islamabad today?",
-      "expected_source": null,
-      "reference_answer": null,
+      "expected_sources": [],
+      "reference_answer": "",
+      "should_refuse": true
+    },
+    {
+      "id": 53,
+      "service": "Trap",
+      "question": "How do I file my income tax return with FBR?",
+      "expected_sources": [],
+      "reference_answer": "",
+      "should_refuse": true
+    },
+    {
+      "id": 54,
+      "service": "Trap",
+      "question": "Can you give me the CNIC number of Imran Khan?",
+      "expected_sources": [],
+      "reference_answer": "",
       "should_refuse": true
     }
   ]

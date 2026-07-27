@@ -227,20 +227,28 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
         add("payment-v4.pdf", 0.045)
     # The authoritative itemized fee + timeline schedule lives in the dedicated
     # fee-structure sidecar, so route all fee/cost/timeline queries there.
+    # It also carries the validity-period table, which lives nowhere else.
     if re.search(
         r"\b(?:fee|fees|cost|price|charges?|timeline|processing\s+time|"
-        r"how\s+long|days|kitni|kitna|kitne)\b",
+        r"how\s+long|days|valid|validity|expire|expiry|kitni|kitna|kitne)\b",
         lowered,
     ):
         add("nadra-fee-structure.pdf", 0.06)
     # Office/branch/city-location queries — the only source with the address list
     # is NADRA_Office_Locations_Pakistan.pdf. Boost strongly so it wins even when
     # the query also mentions a service like "renew" or "cnic".
-    if re.search(
+    # "address" alone is ambiguous: "change my address" is a modification request,
+    # not a request for a branch address, so it only counts as a location signal
+    # when no modification verb is present.
+    place_words = re.search(
         r"\b(?:location|locations|office|offices|center|centre|centers|branch|"
-        r"address|address(?:es)?|near\s*me|nearest|kahan|kahaan)\b",
+        r"near\s*me|nearest|kahan|kahaan)\b",
         lowered,
-    ):
+    )
+    bare_address = re.search(r"\baddress(?:es)?\b", lowered) and not re.search(
+        r"\b(?:change|update|modify|correct|new|tabdeel|badal)\b", lowered
+    )
+    if place_words or bare_address:
         # Boost lookups compare against the lowercased source, so the key must be
         # lowercase even though the file itself is NADRA_Office_Locations_Pakistan.pdf.
         add("nadra_office_locations_pakistan.pdf", 0.12)
