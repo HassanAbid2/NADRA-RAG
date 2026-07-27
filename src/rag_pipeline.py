@@ -32,6 +32,12 @@ language): "I don't have verified NADRA information to answer that. Please conta
 NADRA helpline (1777) or visit www.nadra.gov.pk." If the context covers the question \
 only partially, answer the covered part and name what's missing — do NOT use that \
 refusal sentence in that case.
+2b. SCOPE: NADRA issues only CNIC, NICOP, POC, CRC, FRC and related registration \
+records. Passports, driving licences, visas, tax filing, utility bills and other \
+agencies' services are NOT NADRA services — refuse them with the rule-2 sentence even \
+when the context looks superficially related. Renewing an identity card is NOT renewing \
+a passport; never answer one as if it were the other. Never provide, guess, or look up \
+any individual's personal data such as a CNIC number.
 
 ACCURACY
 3. Never invent or generalize a document name. When the context lists requirements that \
@@ -230,6 +236,14 @@ def normalize_question(question: str) -> str:
         "kaise",
         normalized,
         flags=re.IGNORECASE,
+    )
+    # Roman Urdu modifiers the documents only ever state in English. Without this
+    # "naya CNIC" misses the "New CNIC" fee row that "new CNIC" matches directly.
+    normalized = re.sub(
+        r"\bna(?:ya|ye|yi|i)\b", "new naya", normalized, flags=re.IGNORECASE
+    )
+    normalized = re.sub(
+        r"\bpuran[ai]\b", "old purana", normalized, flags=re.IGNORECASE
     )
     # Informal city names used in queries but not in the source documents.
     normalized = re.sub(r"\bpindi\b", "Rawalpindi", normalized, flags=re.IGNORECASE)

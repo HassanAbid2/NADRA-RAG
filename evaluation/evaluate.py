@@ -21,7 +21,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from langchain_groq import ChatGroq  # noqa: E402
 
-from rag_pipeline import answer_question, retrieve  # noqa: E402
+from rag_pipeline import answer_question, normalize_question, retrieve  # noqa: E402
 
 REFUSAL_MARKER = "i don't have verified nadra information"
 JUDGE_MODEL = "llama-3.3-70b-versatile"
@@ -44,7 +44,10 @@ def evaluate_retrieval(questions):
         if q["should_refuse"]:
             continue
         total += 1
-        retrieved = [d.metadata.get("source") for d in retrieve(q["question"])]
+        # Normalize exactly as answer_question() does, or the score measures a
+        # different pipeline than the one users hit.
+        interpreted = normalize_question(q["question"])
+        retrieved = [d.metadata.get("source") for d in retrieve(interpreted)]
         if set(q["expected_sources"]) & set(retrieved):
             hits += 1
         else:

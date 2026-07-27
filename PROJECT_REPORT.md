@@ -307,23 +307,58 @@ remaining five are genuine:
    failure — the grounding guarantee is the point of the system.
 2. **"How long does executive processing take for a new CNIC?"** answered "not
    specified" although retrieval returned the fee schedule, which states 6 days.
-3. **A Roman Urdu regression.** "Naya CNIC banwane ki fees kitni hai?" replied
-   that the fee is unknown, while the identical question in English answered
-   correctly — so the failure is language-specific, not a retrieval gap.
+3. **A Roman Urdu failure.** "Naya CNIC banwane ki fees kitni hai?" replied that
+   the fee is unknown, while the identical question in English answered
+   correctly.
 4. **NICOP document list** returned renewal requirements instead of the form's
    document list, despite correct retrieval.
 5. **Address change** produced vague, partly invented guidance.
 
-The pattern is consistent: **retrieval now puts the right document in front of
-the model, and the model does not always use it.** That points at the prompt and
-the answer-construction step, not the knowledge base.
+### 7.4 Follow-up: two fixed, and one diagnosis corrected
+
+**The Roman Urdu failure was not a generation problem.** It was first recorded
+above as the model ignoring its context. Comparing retrieval page by page showed
+otherwise:
+
+| Query | Pages retrieved from the fee schedule |
+|---|---|
+| "What is the fee for a new CNIC?" | **p1**, p7, p1, p6 |
+| "Naya CNIC banwane ki fees kitni hai?" | p6, p2, p7 — **p1 absent** |
+
+Page 1 is the page holding "New CNIC: Normal fee Rs. 0/-". The model answered
+"unknown" because the fee genuinely was not in its context — correct grounding
+behaviour on bad retrieval. The cause is the keyword half of the hybrid search:
+`naya` does not match `new`, so the exact row never surfaced.
+
+Fixed by normalising Roman Urdu modifiers (`naya`/`nayi` → `new`,
+`purana` → `old`) before retrieval, the same mechanism already used for informal
+city names. Page 1 now enters the retrieved set.
+
+**The passport trap was genuinely prompt-level** and is fixed. A scope rule was
+added stating that passports, driving licences, visas and tax filing are not
+NADRA services, that renewing an identity card is not renewing a passport, and
+that no individual's personal data may ever be supplied. Verified:
+
+> *"How do I renew my Pakistani passport?"* → "I don't have verified NADRA
+> information to answer that. Please contact the NADRA helpline (1777)..."
+
+**A flaw in the evaluation harness was also corrected.** `evaluate.py` scored
+retrieval on the raw question, while the live pipeline retrieves on the
+*normalised* question — so the harness was measuring a different path than users
+hit, and would have hidden exactly the class of bug described above. It now
+normalises identically. Retrieval remains 48/48 on the corrected path.
+
+The remaining generation failures (NICOP document list, address change,
+executive processing timeline) are unverified after these changes: the daily
+Groq quota was exhausted mid-verification, so a full graded re-run is still
+outstanding.
 
 ---
 
 ## 8. Known limitations
 
-- **Generation accuracy is the bottleneck** (§7.3), especially grounding
-  discipline on traps and consistency across languages.
+- **Generation accuracy is the bottleneck** (§7.3). Two of the five genuine
+  failures are fixed (§7.4); three remain unverified pending API quota.
 - **Free-tier token quota** caps evaluation. A full 54-question graded run does
   not fit in one day's budget; the quota is per organisation, so extra keys do
   not help.
@@ -340,10 +375,10 @@ the answer-construction step, not the knowledge base.
 
 ## 9. Recommended next steps
 
-1. Fix the trap-refusal failure and the Roman Urdu fee regression — both are
-   prompt-level, both are now reproducible from the gold set.
-2. Re-run the full 54-question graded evaluation once quota allows, and track the
-   score over time.
+1. ~~Fix the trap-refusal failure and the Roman Urdu fee question~~ — **done**,
+   see §7.4. The first was prompt-level; the second turned out to be retrieval.
+2. Re-run the full 54-question graded evaluation once quota allows, to confirm
+   those two fixes and re-check the three unverified generation failures.
 3. Rewrite and commit the Google Places collection script so the location data is
    reproducible.
 4. Spot-check the two remaining vision transcriptions against their source pages,
