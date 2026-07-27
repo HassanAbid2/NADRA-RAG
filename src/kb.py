@@ -159,6 +159,16 @@ _QUERY_EXPANSIONS = (
     (r"\b(?:banwana|banwane|apply|application)\b", "apply application process steps"),
     (r"\b(?:kaise|kesay|kese|how)\b", "how process steps"),
     (r"\b(?:eligible|eligibility|kaun|kon)\b", "eligible eligibility requirements"),
+    # A "make/new CNIC or NICOP" query means fresh registration; steer BM25 and
+    # vector search toward the fresh-registration policy pages, not reprint/renewal.
+    (
+        r"\b(?:make|new|fresh|first|create|banwa\w*)\b.*\b(?:cnic|nicop|id card|identity card)\b"
+        r"|\b(?:cnic|nicop|id card|identity card)\b.*\b(?:make|new|fresh|first|create|banwa\w*)\b",
+        "fresh new registration of citizens 18 years or above resident citizen "
+        "application by applicant computerized birth certificate requirements "
+        "with blood relative without blood relative system independent "
+        "biometric verification affidavit attestation CNICF",
+    ),
 )
 
 
@@ -189,6 +199,11 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
         add("registration-policy-6-0-1-english.pdf", 0.018)
         if re.search(r"\b(?:document|documents|required|requirement)\b", lowered):
             add("registration-policy-6-0-1-english.pdf", 0.035)
+    if re.search(r"\bcnic\b", lowered) and re.search(
+        r"\b(?:new|fresh|first|make|banwa|banwane|banwana|create|apply|application|get)\b",
+        lowered,
+    ):
+        add("registration-policy-6-0-1-english.pdf", 0.045)
     if re.search(r"\b(?:reprint|lost|damaged)\b", lowered):
         add("reprint-guide.pdf", 0.045)
     if re.search(r"\bnicop\b", lowered):
@@ -210,6 +225,25 @@ def _intent_source_boosts(query: str) -> dict[str, float]:
         add("registration-policy-6-0-1-english.pdf", 0.006)
     if re.search(r"\b(?:payment|pay|raast|easypaisa|jazzcash)\b", lowered):
         add("payment-v4.pdf", 0.045)
+    # The authoritative itemized fee + timeline schedule lives in the dedicated
+    # fee-structure sidecar, so route all fee/cost/timeline queries there.
+    if re.search(
+        r"\b(?:fee|fees|cost|price|charges?|timeline|processing\s+time|"
+        r"how\s+long|days|kitni|kitna|kitne)\b",
+        lowered,
+    ):
+        add("nadra-fee-structure.pdf", 0.06)
+    # Office/branch/city-location queries — the only source with the address list
+    # is NADRA_Office_Locations_Pakistan.pdf. Boost strongly so it wins even when
+    # the query also mentions a service like "renew" or "cnic".
+    if re.search(
+        r"\b(?:location|locations|office|offices|center|centre|centers|branch|"
+        r"address|address(?:es)?|near\s*me|nearest|kahan|kahaan)\b",
+        lowered,
+    ):
+        # Boost lookups compare against the lowercased source, so the key must be
+        # lowercase even though the file itself is NADRA_Office_Locations_Pakistan.pdf.
+        add("nadra_office_locations_pakistan.pdf", 0.12)
     if re.search(r"\bphoto|photograph\b", lowered):
         add("photgraph-guidelines-v4.pdf", 0.04)
         add("photo-guidelines.pdf", 0.04)

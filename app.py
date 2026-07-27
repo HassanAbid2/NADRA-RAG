@@ -93,13 +93,18 @@ async def chat(payload: ChatRequest) -> ChatResponse:
         )
     except Exception as exc:
         logger.exception("Unable to answer question.")
-        raise HTTPException(
-            status_code=503,
-            detail=(
+        if getattr(exc, "status_code", None) == 429 or "rate limit" in str(exc).lower():
+            detail = (
+                "The free daily usage limit for the AI service has been reached. "
+                "Please try again in a few minutes, or contact the NADRA helpline "
+                "(1777) or visit www.nadra.gov.pk in the meantime."
+            )
+        else:
+            detail = (
                 "I couldn't complete that request. Please check the API "
                 "connection and try again."
-            ),
-        ) from exc
+            )
+        raise HTTPException(status_code=503, detail=detail) from exc
 
     return ChatResponse(
         answer=result["answer"],

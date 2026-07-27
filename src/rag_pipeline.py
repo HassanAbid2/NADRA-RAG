@@ -14,7 +14,7 @@ import kb
 load_dotenv(kb.PROJECT_ROOT / ".env")
 
 LLM_MODEL = "llama-3.3-70b-versatile"
-TOP_K = 6
+TOP_K = 5
 
 SYSTEM_PROMPT = """You are an official FAQ assistant for NADRA (National Database and \
 Registration Authority, Pakistan). You answer citizen questions about NADRA services: \
@@ -23,46 +23,46 @@ Certificate) — covering required documents, eligibility, fees, processing time
 and procedures.
 
 STRICT RULES:
-1. Answer ONLY using the CONTEXT provided below. Never use outside knowledge.
-2. If the context contains no relevant information at all, do not guess. Say that \
-verified NADRA information is unavailable and advise the user to contact the NADRA \
-helpline (1777) or visit www.nadra.gov.pk, using the language rules below. For an \
-English question, reply exactly: "I don't have verified NADRA information to answer \
-that. Please contact the NADRA helpline (1777) or visit www.nadra.gov.pk."
-2b. If the context answers the question only partially, give the part that IS \
-covered and clearly say which part is not covered by official NADRA documents.
-2c. Use CONVERSATION HISTORY to understand follow-up questions. If the user asks \
-to repeat, translate, shorten, or change the language of the previous answer, act \
-on the previous answer instead of treating the request as a new NADRA topic.
-2d. Read the INTERPRETED CURRENT QUESTION carefully and directly answer every part \
-the user asked. For a procedure, give clear numbered steps in the order supported by \
-the context. For documents, fees, eligibility, or timelines, use separate labeled \
-sections when the question asks for more than one. Ignore retrieved passages that are \
-not relevant to the interpreted question.
-2e. Answer only what the user asked. Do not append fee, timeline, document, eligibility, \
-or other sections unless the user requested them or they are essential to the requested \
-procedure.
-2f. Never invent or generalize a document name. If a guide says "upload necessary \
-documents" without naming them, state that the guide does not specify the document list. \
-If another relevant policy passage gives precise resident/non-resident requirements, \
-state those requirements exactly instead of saying "other required documents."
-2g. For an app procedure, include the starting navigation path from the relevant guide \
-(for example, the app section and option to tap) before later steps. Do not skip the \
-entry point.
-3. Match the user's language and writing style:
-   - English question: answer in clear, plain English.
-   - Urdu-script question: answer in Pakistani Urdu using the Urdu/Arabic script.
-   - Roman-Urdu or mixed Urdu-English question: answer in natural Pakistani Roman \
-     Urdu using the Latin alphabet, keeping familiar English service names and \
-     technical terms where helpful.
-   - If uncertain, mirror the language and script used by the user. Do not answer an \
-     Urdu or Roman-Urdu question only in English.
-   - NEVER answer in Hindi or use Devanagari characters. Urdu and Hindi are not \
-     interchangeable for this assistant.
-4. When the context gives fees, timelines, or document lists, state them precisely as \
-written — do not round or alter numbers while translating the surrounding explanation.
-5. End your answer with a "Sources:" line listing the document names and pages you used. \
-For a language-only rewrite, retain the previous answer's source citations.
+
+GROUNDING
+1. Answer ONLY from the CONTEXT below — never outside knowledge. State fees, timelines, \
+and document lists exactly as written; never round or change numbers.
+2. Only when the context has NO relevant information, reply exactly (in the user's \
+language): "I don't have verified NADRA information to answer that. Please contact the \
+NADRA helpline (1777) or visit www.nadra.gov.pk." If the context covers the question \
+only partially, answer the covered part and name what's missing — do NOT use that \
+refusal sentence in that case.
+
+ACCURACY
+3. Never invent or generalize a document name. When the context lists requirements that \
+differ by scenario (resident vs non-resident, with vs without a blood relative), give \
+EVERY scenario as its own labeled list with its exact documents — never call them \
+unspecified when the context lists them.
+4. Distinguish APPLYING from RECEIVING: content about collecting a finished card (token \
+slip, authority letter, home delivery, "receiving of identity document") is NOT the list \
+of documents needed to apply — do not present it as such.
+5. If the context says an application auto-submits from records NADRA already holds \
+(e.g. an FRC built from existing family data), lead with that — no separate checklist is \
+needed beyond what's on file; only list what the user must supply for gaps the context \
+names (such as adding an unregistered family member).
+
+CLARITY & FORMAT
+6. Write for an ordinary citizen. Lead with the direct answer in one plain sentence, then \
+detail. Synthesize in your own words — do not paste raw fragments, table labels, or \
+screen/section headings that don't answer the question. Say "not specified" once, not per \
+item. Answer only what was asked; don't append unrequested sections. Use short numbered \
+steps for procedures (give the app entry point first) and short bullets for lists. Use \
+CONVERSATION HISTORY for follow-ups; if the user asks to repeat, translate, shorten, or \
+restyle the previous answer, act on that answer, not a new topic.
+
+LANGUAGE
+7. Reply in the user's language: English → plain English; Urdu script → Pakistani Urdu in \
+Urdu script; Roman-Urdu or mixed → natural Pakistani Roman Urdu (Latin letters), keeping \
+English service names. If unsure, mirror the user. NEVER use Hindi or Devanagari.
+
+SOURCES
+8. End with a "Sources:" line listing the document names and pages used. For a \
+language-only rewrite, keep the previous answer's citations.
 
 LANGUAGE REQUIREMENT FOR THIS QUESTION:
 {language_instruction}
@@ -154,16 +154,39 @@ _ROMAN_URDU_MARKERS = {
     "par",
     "process",
     "se",
+    "karun",
+    "karoon",
+    "karna",
+    "karni",
+    "kaha",
+    "wala",
+    "wali",
+    "sakta",
+    "sakte",
+    "hoti",
+    "hota",
+}
+# Unambiguous Roman-Urdu-only tokens: a single one is enough to classify a
+# short question as Roman Urdu (they are never ordinary English words).
+_STRONG_ROMAN_URDU = {
+    "banaun", "banaon", "banana", "banau", "banana", "banwana", "banwane",
+    "kaise", "kaisay", "kese", "kesay", "kaisa", "kahan", "kahaan", "kyun", "kyu",
+    "chahiye", "chahiyay", "batao", "batau", "batayen", "mujhe", "mjhe",
+    "karun", "karoon", "zaroori", "dastavez", "darkhwast", "maloomat",
 }
 _LANGUAGE_FOLLOWUP_RE = re.compile(
     r"\b(?:reply|answer|respond|translate|write|likho|batao)\b.*"
     r"\b(?:urdu|roman\s+urdu|english)\b|"
-    r"\b(?:urdu|roman\s+urdu|english)\b.*\b(?:reply|answer|mein|main|me)\b",
+    r"\b(?:urdu|roman\s+urdu|english)\b.*\b(?:reply|answer|mein|main|me)\b|"
+    # A short standalone language request ("in urdu", "urdu", "english mein").
+    r"^\s*(?:in\s+|reply\s+in\s+|answer\s+in\s+)?(?:roman\s+urdu|urdu|english)"
+    r"\s*(?:mein|main|me)?\s*[!.?]*\s*$",
     re.IGNORECASE,
 )
 _GREETING_RE = re.compile(
-    r"^\s*(?:a+o+a+|aoa|ass?alam(?:\s+o|\s+u|\s+alaikum)?|"
-    r"السلام\s+علیکم|سلام|hello|hi|hey)\s*[!.?]*\s*$",
+    r"^\s*(?:a+o+a+|aoa|ass?alam(?:(?:u|\s*[ou])?\s*alaikum?)?|sal[aa]+m(?:\s*u?\s*alaikum?)?|"
+    r"السلام\s+علیکم|سلام|hello+|hi+|hey+|yo+|sup|howdy|"
+    r"good\s+(?:morning|afternoon|evening)|salaam)\s*[!.?]*\s*$",
     re.IGNORECASE,
 )
 _REFUSAL_MARKERS = (
@@ -182,6 +205,11 @@ def classify_question_language(question: str) -> str:
     lowered = question.lower()
     if re.search(r"\broman[\s-]*urdu\b", lowered):
         return "roman_urdu"
+    # Bare or prefixed language requests: "in urdu", "urdu mein", "reply in urdu".
+    if re.search(r"\b(?:in\s+)?urdu\b(?:\s+(?:mein|main|me))?", lowered) and not (
+        tokens := set(re.findall(r"[a-z]+", lowered))
+    ) & (_ROMAN_URDU_MARKERS | _STRONG_ROMAN_URDU):
+        return "urdu"
     if re.search(r"\b(?:reply|answer|respond|write)\s+in\s+urdu\b", lowered):
         return "urdu"
     if re.search(r"\burdu\s+(?:mein|main|me)\b", lowered):
@@ -189,7 +217,7 @@ def classify_question_language(question: str) -> str:
 
     tokens = set(re.findall(r"[a-z]+", lowered))
     marker_count = len(tokens & _ROMAN_URDU_MARKERS)
-    if marker_count >= 2 or tokens & {"banwana", "banwane", "chahiye"}:
+    if marker_count >= 2 or tokens & _STRONG_ROMAN_URDU:
         return "roman_urdu"
     return "english"
 
@@ -203,6 +231,10 @@ def normalize_question(question: str) -> str:
         normalized,
         flags=re.IGNORECASE,
     )
+    # Informal city names used in queries but not in the source documents.
+    normalized = re.sub(r"\bpindi\b", "Rawalpindi", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bbahawapur\b", "Bahawalpur", normalized, flags=re.IGNORECASE)
+    normalized = re.sub(r"\bisb\b", "Islamabad", normalized, flags=re.IGNORECASE)
     return normalized
 
 
@@ -271,7 +303,7 @@ def greeting_response(question: str) -> str:
     if language == "urdu":
         return "وعلیکم السلام! نادرا خدمات کے بارے میں میں آپ کی کیا مدد کر سکتا ہوں؟"
     if language == "roman_urdu" or re.search(
-        r"\b(?:aoa|ass?alam)\b", question.lower()
+        r"a+o+a+|ass?alam|sal[aa]+m", question.lower()
     ):
         return (
             "Wa Alaikum Assalam! NADRA services ke hawale se main aap ki "
@@ -353,6 +385,20 @@ def sources_used_by_answer(docs, answer: str) -> list[dict]:
         else:
             sources.append({"source": source, "page": None})
     return sources
+
+
+def strip_sources_line(answer: str) -> str:
+    """Drop the trailing Sources: block — the frontend renders sources separately.
+
+    Handles the English label plus the Urdu/Roman-Urdu equivalents the model
+    produces when answering in those languages.
+    """
+    return re.split(
+        r"\n+\s*(?:sources?|مصادر|ماخذ|ذرائع|حوالہ(?:\s*جات)?|maloomat\s+ka\s+zariya)\s*[:：]?",
+        answer,
+        maxsplit=1,
+        flags=re.IGNORECASE,
+    )[0].strip()
 
 
 def _get_llm():
@@ -456,4 +502,4 @@ def answer_question(
         sources = previous_answer.get("sources", [])
     else:
         sources = sources_used_by_answer(docs, response.content)
-    return {"answer": response.content, "sources": sources}
+    return {"answer": strip_sources_line(response.content), "sources": sources}
