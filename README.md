@@ -57,3 +57,17 @@ the PDF collection, run:
 ```powershell
 .\.venv\Scripts\python src\ingest.py
 ```
+
+## Knowledge-base data
+
+`pdfs_data/` holds the source corpus. Only part of it is in git:
+
+- **Tracked** — `pdfs_data/transcribed/*.txt` (hand-written sidecars, including the
+  authoritative `nadra-fee-structure.txt`) and `NADRA_Office_Locations_Pakistan.pdf`.
+  These are not reproducible from the PDFs.
+- **Not tracked** — the ~27 official NADRA PDFs (~226 MB), downloadable from
+  [nadra.gov.pk](https://www.nadra.gov.pk/). Drop them into `pdfs_data/` and run
+  `src\ingest.py` to build `data/vector_store`.
+
+Ingestion reads both the PDFs and the sidecars, so a fresh clone answers fee and
+office-location questions even before the PDFs are added.

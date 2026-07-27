@@ -1,0 +1,203 @@
+[Page 1]
+# MANUAL APPLICATION FORM
+## Smart Pakistan Origin Card (SPOC)
+
+### PERSONAL DETAILS
+
+1. Application Type
+    - New
+    - Duplicate
+    - Modification
+    - Renewal
+
+2. Tracking ID: 
+3. Receipt No: 
+
+4. Given Name(s)
+5. Surname
+6. Citizen Number
+7. Gender
+    - Male
+    - Female
+
+8. Date of Birth 
+9. Marital Status
+    - Un-Married
+    - Married
+    - Divorced
+    - Widowed
+
+10. Religion
+11. Others
+
+### Following Questions
+
+12. Have you ever been a citizen/national of India or Israel?
+13. Have you ever been deprived of Pakistani citizenship by the order of the Government of Pakistan or Israel?
+14. Any of your parents/grand parents are present/ presently citizen/national of India or Israel?
+
+15. Profession
+16. Qualification
+    - None
+    - Primary
+    - Secondary
+    - Matric/High School(Inter)
+    - Graduation
+    - Post Graduation
+    - Doctorate
+    - Others
+
+17. Are You a Twin Sibling?
+18. Have Any Disability?
+19. Certificate No.
+
+### GROUNDS FOR POC
+
+20. Which you claim your POC?
+    - Spouse Based
+    - Parents/Grand Parents Based
+    - Ex-Pakistani
+    - Office Mistake
+
+### PASSPORT DETAILS
+
+21. Please Provide Your Passport / NICOP Number
+22. Foreign Passport No.
+23. Expiry Date
+
+### RELATIVES DETAILS
+
+24. Please Add All Your Previous Nationalities
+    - Present Nationality
+    - Previous Nationalities
+
+25. Date of Acquiring
+26. Renunciation Certificate No.
+
+27. Father Name
+28. Citizen Number
+29. Mother Name
+30. Citizen Number
+31. Spouse Name
+32. Citizen Number
+
+### ADDITIONAL RELATIVES
+
+33. Relative Name
+34. Citizen No.(CNIC/NICOP) 
+    - Yes 
+    - No
+35. Relative Blood Relation
+36. Relative Relation with Applicant
+
+### ADDRESS DETAILS
+
+37. Present Address (Country, State/Province, District, Tehsil, City, Street)
+38. Permanent Address (Country, State/Province, District, Tehsil, City, Street)
+39. Postal Code
+40. Phone No.
+41. Email
+
+### INSTRUCTIONS
+
+- Please provide the answers of the following questions.
+- Applicant Passport Size Photograph with white background as per ICAO Standards 35mm x 45mm.
+
+[Page 2]
+GOVERNMENT OF PAKISTAN  
+MINISTRY OF INTERIOR AND REGISTRATION AUTHORITY  
+NATIONAL ID CARD SYSTEM (SNICOP-2(PK)  
+
+**APPLICANT'S DECLARATION**
+
+55. Solemnly affirm that the information presented in the form above is true according to the best of my knowledge and I have not concealed any information. I confirm that this verification, if provided, may be verified and the attached documents may be grounds for my prosecution. I solemnly declare that I am not a citizen of Pakistan & Germany. Children having dual nationality with Pakistan & Germany and who grew up in Pakistan, in addition to their parents' nationality, shall inform NADRA accordingly. In case I do not inform NADRA about my future, I solemnly declare that I believe I am not a citizen of Pakistan. I do not belong to the Lahori group or any other Ahmadi group (who call themselves 'Ahmadis'). I do not belong to the Lahori group or any other Ahmadi group (who call themselves 'Ahmadis').
+
+**VERIFIER DECLARATION**
+
+57. Solemnly verify that applicant is personally known to me and the information provided on the form is correct.
+
+**APPLICATION DETAILS**
+
+Application Type:  
+New  
+Renewal  
+Duplicate  
+Modification  
+Office Mistake  
+
+Applicant Given Name (s):  
+Applicant Citizen No.:  
+Receipt No.:  
+
+Amount:  
+Currency:  
+
+**INSTRUCTIONS**
+
+The information provided in the form must not differ from information submitted in online application form. In case of uploading your information in online application form, your application may be delayed or rejected.  
+* Fields having asterisk * are compulsory.  
+The form must be completely filled with black pen to capture the fingerprint impressions.  
+Ensure that the designated field or tax and are within the guidelines (http://www.nadra.gov.pk/docs/fingerprintguideline.pdf).  
+Ensure that the form is printed on A4 size paper.  
+Ensure that this form must be scanned at least 600 dpi.  
+Ensure that the form size must not exceeded from 10 MB.
+
+**Form and Documents Receiving Person's Name and Designation**
+
+Stamp & Signature  
+
+**SMART POC**
+
+Signature & Stamp  
+Approval by AD IOD  
+NADRA-2-S  
+This form is not to be sold to the applicants  
+Form is available by National Database and Registration Authority and is free.
+
+[Page 3]
+# INSTRUCTIONS - POC
+
+## General Instructions:
+Please fill the form in **BLACK INK** and clearly print or type only in **CAPITAL/BLOCK** letters and avoid contact with the edges of the same line or where nothing further is to be written. A box may be left empty wherever a new word begins in the form if possible. Please make sure the form is filled as neatly as possible. Over-writing is not allowed. Applicant will be responsible for any mistakes. A box adjacent to the appropriate answer is mandatory. Parent/guardian may sign in case of inability of applicant.
+
+a. 
+b. 
+c. 
+d. 
+e. 
+f. 
+g. 
+h. 
+
+## Documents Required:
+a. Bank Receipt
+b. Two Recent Photographs (35x45 MM)
+c. Attested photocopy of Foreign Passport, NIC, Grand Passport etc OR any document like CNIC showing link with Parents
+d. Applicant's Pakistani ID documents like Birth Certificate, NIC
+e. Attested copy of marriage certificate with statement OR Attested marriage certificate only
+f. Original CNIC/CRC/NICOP (if held)
+
+## Note:
+You should inform NADRA in writing if you are/were a citizen of Pakistan along with this form, if you are a citizen of any of the territories included in India on the 31st March, 1937.
+
+## Instructions on Individual Fields:
+a. Types of application (Fields 1,4,8) 
+b. All Names (Fields 4 to 19 where space provided, leave unused space appropriately)
+c. NIC number (Field 2 to 29 where you would like it to appear on the card and should not exceed twenty-seven (27) characters in any case)
+d. Date of birth (Field 9)
+e. Email address (Field 38-41)
+f. Photo, Thumb and Signature MUST be visible (without glasses)
+g. Fill out payment details and attach original deposit slip
+h. If field 18 is yes then field 19 is mandatory with documentary evidence
+i. Fingerprints (Field 56)
+k. Present Address (Field 42, 43, 44, 45&46)
+l. One Pakistani address is sufficient. Abbreviate longer names appropriately so that they remain understandable.
+
+## Declaration by Pakistani Spouse (Foreign Spouse Case only):
+I being a Pakistani Spouse of the applicant, own the responsibility of reporting to NADRA for cancellation of POC in case separation/divorce is effected.
+
+## Disclaimer:
+NADRA accepts no responsibility for any error in the card if it is not reported within **90 days** of receipt.
+
+## Signature of Pakistani Spouse
+## Applicant's Signature

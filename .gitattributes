@@ -1,0 +1,3 @@
+# core.autocrlf=true misdetects the ReportLab-generated office-locations PDF as
+# text and would rewrite its line endings on checkout, corrupting the file.
+*.pdf binary

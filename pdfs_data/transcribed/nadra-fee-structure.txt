@@ -1,0 +1,112 @@
+[Page 1]
+NADRA Fee Structure — Processing Fee and Timeline for CNIC and Smart CNIC (Inland, in PKR).
+Every service has three priority categories: Normal, Urgent, and Executive.
+
+New CNIC: Normal fee Rs. 0/- (free) processed in 15 days; Urgent fee Rs. 1,150/- in 12 days; Executive fee Rs. 2,150/- in 6 days.
+CNIC Modification: Normal fee Rs. 400/- in 15 days; Urgent fee Rs. 1,150/- in 12 days; Executive fee Rs. 2,150/- in 6 days.
+Duplicate CNIC: Normal fee Rs. 400/- in 15 days; Urgent fee Rs. 1,150/- in 12 days; Executive fee Rs. 2,150/- in 6 days.
+CNIC Renewal: Normal fee Rs. 400/- in 15 days; Urgent fee Rs. 1,150/- in 12 days; Executive fee Rs. 2,150/- in 6 days.
+
+New Smart NIC (Smart CNIC): Normal fee Rs. 750/- in 31 days; Urgent fee Rs. 1,500/- in 23 days; Executive fee Rs. 2,500/- in 9 days.
+Smart NIC Modification: Normal fee Rs. 750/- in 31 days; Urgent fee Rs. 1,500/- in 23 days; Executive fee Rs. 2,500/- in 9 days.
+Smart NIC Duplicate: Normal fee Rs. 750/- in 31 days; Urgent fee Rs. 1,500/- in 23 days; Executive fee Rs. 2,500/- in 9 days.
+Smart NIC Renewal: Normal fee Rs. 750/- in 31 days; Urgent fee Rs. 1,500/- in 23 days; Executive fee Rs. 2,500/- in 9 days.
+
+[Page 2]
+NADRA Fee Structure — CRC, FRC, and Cancellation Certificate fees and timelines.
+
+CNIC / CRC Cancellation (due to death): Normal fee Rs. 0/- (free) processed in 1 day. Urgent and Executive not applicable.
+
+CRC (Child Registration Certificate, all categories): Normal fee PKR 50/- in 7 days; Executive fee PKR 500/- in 1 day. Urgent not applicable.
+
+FRC (Family Registration Certificate) for Alpha / Beta / Gama family: Executive fee PKR 1,000/- in 1 day. Normal and Urgent not applicable.
+FRC (Family Registration Certificate) for Both: Executive fee PKR 2,000/- in 1 day. Normal and Urgent not applicable.
+
+[Page 3]
+NADRA Fee Structure — Processing Fee and Timeline for Smart NICOP (in USD), charged by zone.
+Zone A covers USA and Europe. Zone B covers Middle East and Africa.
+
+Zone A (USA and Europe) — Smart NICOP fees:
+New Smart NICOP: Normal fee USD 39/- in 31 days; Urgent fee USD 57/- in 23 days; Executive fee USD 75/- in 9 days.
+Smart NICOP Modification: Normal fee USD 39/- in 31 days; Urgent fee USD 57/- in 23 days; Executive fee USD 75/- in 9 days.
+Smart NICOP Duplicate: Normal fee USD 39/- in 31 days; Urgent fee USD 57/- in 23 days; Executive fee USD 75/- in 9 days.
+Smart NICOP Renewal: Normal fee USD 39/- in 31 days; Urgent fee USD 57/- in 23 days; Executive fee USD 75/- in 9 days.
+NICOP Cancellation (due to death) in Zone A: USD 0/- in 1 day.
+
+Zone B (Middle East and Africa) — Smart NICOP fees:
+New Smart NICOP: Normal fee USD 20/- in 31 days; Urgent fee USD 30/- in 23 days; Executive fee USD 40/- in 9 days.
+Smart NICOP Modification: Normal fee USD 20/- in 31 days; Urgent fee USD 30/- in 23 days; Executive fee USD 40/- in 9 days.
+Smart NICOP Duplicate: Normal fee USD 20/- in 31 days; Urgent fee USD 30/- in 23 days; Executive fee USD 140/- in 9 days.
+Smart NICOP Renewal: Normal fee USD 20/- in 31 days; Urgent fee USD 30/- in 23 days; Executive fee USD 40/- in 9 days.
+NICOP / CNIC / CRC Cancellation (due to Nationality Surrender): Normal fee USD 0/- in 1 day; Executive fee USD 15/- in 2 days.
+
+[Page 4]
+NADRA Fee Structure — Processing Fee and Timeline for Smart POC (Pakistan Origin Card, in USD).
+
+New POC: Normal fee USD 150/- in 31 days; Urgent fee USD 200/- in 23 days; Executive fee USD 250/- in 9 days.
+POC Modification: Normal fee USD 200/- in 31 days; Urgent fee USD 250/- in 23 days; Executive fee USD 300/- in 9 days.
+POC Duplicate: Normal fee USD 200/- in 31 days; Urgent fee USD 250/- in 23 days; Executive fee USD 300/- in 9 days.
+POC Renewal: Normal fee USD 150/- in 31 days; Urgent fee USD 200/- in 23 days; Executive fee USD 250/- in 9 days.
+
+POC Cancellation (due to death): Executive fee USD 25/- in 2 days.
+POC Cancellation (due to Divorce): Executive fee USD 25/- in 2 days.
+POC Cancellation (due to surrender of Nationality): Executive fee USD 15/- in 2 days.
+
+[Page 5]
+NADRA Fee Structure — Updating Non-Printable Fields, and Clearance of Multiple Identity Cards.
+
+Updating Non-Printable Fields:
+CNIC / NICOP updated from NRC: Rs. 100/- in 2 days.
+CNIC / NICOP updated from PakID Mobile App: USD 5/- in 2 days.
+POC non-printable field update: USD 30/- in 2 days.
+
+Clearance of Multiple Identity Cards:
+Similar particular or particular with slight difference (Zone A and B): USD 10/-.
+With different particular (Zone A countries): Normal USD 250/-, Executive USD 500/-.
+With different particular (Zone B countries): Normal USD 120/-, Executive USD 200/-.
+Similar particular or slight difference (Inland): Normal PKR 1,000/-, Executive PKR 20,000/-.
+With different particular (Inland): Normal PKR 10,000/-, Executive PKR 20,000/-.
+
+[Page 6]
+NADRA Fee Structure — Age Modification in ID Cards, and Succession Certificate.
+
+Processing Fee for Age Modification in ID Cards:
+Age change up to 1 year: Inland Rs. 1,000/-, Abroad USD 15/-.
+Age change more than 1 year and up to 2 years: Inland Rs. 2,000/-, Abroad USD 25/-.
+Age change more than 2 years and up to 3 years: Inland Rs. 3,000/-, Abroad USD 40/-.
+Age change more than 3 years: Inland Rs. 5,000/-, Abroad USD 65/-.
+Second time age change: Inland Rs. 10,000/-, Abroad USD 125/-.
+
+Processing Fee for issuance of Succession Certificate (and decline on processed application):
+New / Fresh application, asset worth equal to or more than Rs. 100,000/-: Rs. 20,000/- (Rs. 22,000/- in case of Sindh). Asset worth less than Rs. 100,000/-: Rs. 10,000/-.
+Duplicate Application: Rs. 5,000/- (both asset brackets).
+Amended Application: Rs. 5,000/- (both asset brackets).
+Decline on Processed application: Rs. 15,000/- (both asset brackets).
+Office Mistake: Free of Cost.
+
+[Page 7]
+NADRA Fee Structure — Delivery Charges, Validity Periods, Important Notices, and Fee Deposit Bank Details.
+
+Delivery Charges (ID Cards):
+Abroad Delivery: Varies from country to country.
+Within Pakistan: PKR 165/-.
+
+Validity Period of ID Cards and Certificates:
+CNIC, Smart CNIC / NICOP for Adults: 10 years.
+Smart NICOP for minors: 10 years.
+Smart NICOP for minors above 14 years of age: 10 years.
+Smart NICOP for minors below 14 years of age: 10 years or 18 years (whichever comes first).
+Juvenile Card: valid upon attaining the age of 10 and 18 years.
+CRC: valid upon attaining the age of 3 or 10 or 18 years.
+Smart POC (Ex-Pakistani, Parents based, FPO family members based): 7 years.
+Smart POC (Spouse based): 5 years.
+
+Important Notice (PakID):
+Fee will be charged in PKR after applicable currency conversion.
+Normal / Urgent / Executive category timeline will start after fee payment.
+
+Procedure for Multiple / duplicate (International) — Bank Details for Fee Deposit:
+Affidavit / declaration as per attached specimen. Applicant will deposit the fee in NADRA online account.
+Bank Name: Habib Bank Limited. Branch: Foreign Office Branch, Islamabad.
+IBAN No: PK45 HABB 0004 6000 5101 0801. Swift Code: HABBPKKA.
+Applicants can forward affidavits and fee receipt by email to dup.op@nadra.gov.pk for further processing.

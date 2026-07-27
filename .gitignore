@@ -2,7 +2,12 @@ venv/
 .venv/
 .env
 data/
-pdfs_data/
+pdfs_data/*
+# The source NADRA PDFs (~226 MB) are re-downloadable from nadra.gov.pk and stay
+# out of git. The hand-written text sidecars and the compiled office-location
+# list are not reproducible, so they are tracked.
+!pdfs_data/transcribed/
+!pdfs_data/NADRA_Office_Locations_Pakistan.pdf
 __pycache__/
 *.pyc
 __MACOSX/

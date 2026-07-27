@@ -1,0 +1,283 @@
+[Page 1]
+# Smart National Identity Card For Overseas Pakistanis
+
+## ANNUAL APPLICATION FORM For Overseas Pakistanis (SNICOP)
+
+### International Operation Department  
+National Database and Registration Authority  
+Ministry of Interior Government of Pakistan  
+
+## PERSONAL DETAILS
+
+1. Application ID:  
+2. Tracking ID:  
+3. Receipt No:  
+4. Given Name (s)  
+5. Surname  
+6. Citizen Number  
+7. Country of Stay  
+8. Date of Birth  
+9. Gender  
+   - Male  
+   - Female  
+   - Transgender  
+   - Unisex  
+10. Native Language (Mother Tongue)  
+11. Old Citizen Number  
+12. Marital Status  
+   - Married  
+   - Un married  
+   - Divorced  
+   - Widowed  
+13. Religion  
+14. Blood Group  
+   - A+  
+   - A-  
+   - B+  
+   - B-  
+   - AB+  
+   - AB-  
+   - O+  
+   - O-  
+15. Identification Mark  
+16. Profession  
+17. Qualification  
+   - Matric  
+   - High School(Inter)  
+   - Secondary  
+   - Primary  
+   - Post Graduate  
+   - Doctorate  
+   - Others  
+18. Are You a Twin Sibling?  
+   - Yes  
+   - No  
+19. Birth Country  
+20. Province/State  
+21. District  
+22. City  
+23. Purpose / Nature of Stay  
+24. Passport Number  
+25. Issuing Country  
+26. Issue Date  
+27. Expiry Date  
+28. Have Any Disability?  
+   - Yes  
+   - No  
+29. AJK Residential Certificate No.  
+30. AJK Residential Status  
+   - Resident  
+   - Immigrant  
+   - None Immigrant  
+   - Dual National  
+
+## RELATIVES DETAILS
+
+31. Father Name  
+32. Father Citizen Number  
+33. Mother Name  
+34. Mother Citizen Number  
+35. Spouse Name  
+36. Spouse Citizen Number  
+37. Marriage Date  
+38. Add Blood Relative Number  
+39. Relative Name  
+40. Relative Citizen No.(CNIC/NICOP)  
+41. Relation with Applicant  
+   - Self  
+   - Parent  
+   - Child  
+   - Sibling  
+   - Grand Child  
+   - Grand Parent  
+   - Adopted Child  
+
+## APPLICANT CONTACT DETAILS
+
+44. Country  
+45. State/Province  
+46. District  
+47. Tehsil  
+48. City  
+49. Street / Additional Details  
+50. Email  
+51. Phone No.  
+
+## PERMANENT ADDRESS
+
+52. Country  
+53. State/Province  
+54. District  
+55. Tehsil  
+56. City  
+57. Street / Additional Details  
+
+## NOTES
+
+- *Office Mistake
+- The form is made available by National Database and Registration Authority and is not to be sold to the applicants.  
+- Passport Size Photograph with white background as per ICAO Standards  
+- Fee: (As per NADRA Website)  
+- Modification  
+- Renewal  
+- Duplicate  
+- New  
+- Gratis
+
+[Page 2]
+GOVERNMENT OF PAKISTAN  
+MINISTRY OF INTERIOR  
+NATIONAL DATABASE AND REGISTRATION AUTHORITY  
+NATIONAL ID CARD SYSTEM (SNICOP-2N)  
+
+APPLICANT'S DECLARATION  
+
+Solemnly affirm to the best of my knowledge and I consent to this verification,  
+that the information given on the attached documents for my prosecution in any court of law.
+
+a. I am a citizen of Pakistan and I understand that providing false or misleading information given on this form may result in prosecution under Pakistan Penal Code.
+
+b. I hereby affirm that the information provided is accurate and I do not conceal any information.
+
+c. I understand that if I am found to have provided false or misleading information on this form, my application will be rejected.
+
+d. I do hereby declare that I am not a citizen of any country other than Pakistan.
+
+e. I and my parents who gave up their Pakistani nationality and children born in Pakistan & Germany (if any) do not belong to the Qadiani group or Lahori group (who call themselves 'Ahmadis' or 'Mirzais').
+
+f. I am not a Prophet or of my religion (sect/church), I do not claim to be a Prophet or religious reformer, nor do I belong to a sect of the world group.
+
+g. I am not a Prophet or religious reformer (sect/church), I do not claim to be a Prophet or religious reformer, nor do I belong to a sect of the world group.
+
+APPLICANT'S SIGNATURE  
+DATE / MONTH / YEAR  
+
+APPLICANT'S FINGERPRINTS  
+
+RIGHT LITTLE  
+RIGHT RING  
+RIGHT MIDDLE  
+RIGHT INDEX  
+RIGHT THUMB  
+
+LEFT LITTLE  
+LEFT RING  
+LEFT MIDDLE  
+LEFT INDEX  
+LEFT THUMB  
+
+VERIFIER DECLARATION  
+
+Solemnly verify that applicant is personally known to me and the information provided on the form is correct.
+
+VERIFIER FULL NAME:  
+VERIFIER CNIC / NICOP No.:  
+
+PAK MISSION DETAILS  
+
+Application Type  
+New  
+Gratis  
+Duplicate  
+Renewal  
+Modification  
+Office Mistake  
+
+Applicant Given Name(s):  
+Applicant Citizen No.:  
+Receipt No.:  
+Amount:  
+Currency:  
+
+Date:  
+Stamp  
+Signature  
+
+Form and Documents Receiving Person's Name and Designation  
+
+INSTRUCTIONS  
+
+The information provided in application form must not differ from information provided in online application form. In case of any missing information, your application may be delayed or rejected. We strongly recommend that you may ensure that you have uploaded your form and documents on the designated online link (http://id.nadra.gov.pk/onlineprint/requirements).
+
+* Fields having * are compulsory.
+
+* Use Black ink to capture the fingerprint impressions.
+
+* Ensure that the fingertip impressions are within the guidelines on the form.
+
+* Ensure that the form is printed on A4 Letter size at least on 600 dpi.
+
+* This form must be scanned at least from 10 MB.
+
+* The form size must not exceeded from 10 MB.
+
+Applicant Passport Size Photograph with white background as per ICAO Standards 35mm  
+
+SMART NICOP  
+
+Signature & Stamp  
+Approval by AD IOD  
+
+NADRA-2N  
+
+FORM No. SMART NICOP - IOD  
+Page-2
+
+[Page 3]
+1. **General Instructions:**
+   a. This form to be filled in by all non-resident citizens specified in rule 4 of the National Database and Registration Authority (National Identity Card) rules 2002.
+   b. Please fill in the form in **BLACK INK** and clearly print or type only in **CAPITAL** letters and avoid contact with edges of the box. A block may be left empty where ever a word ends and a new word begins in the same line.
+   c. Avoid any overwriting and other mistakes while filling the form. Please make sure the form is filled as neatly as possible. If there are any mistakes in the form, please fill a new form. Exact photocopies of the form are only acceptable on A4 size paper.
+   d. Wherever small choice field boxes [] are provided in the form, the box adjacent to the appropriate answer is to be ticked or checked like "X".
+   e. In case applicant is illiterate left hand thumb impression at serial No. 57 is mandatory. Such applicant shall affix left hand thumb impression at the end of page-1(B). Parent/guardian may sign in case of inability on part of the applicant.
+   f. Attach original Bank Receipt with this form.
+
+   g. **DISCLAIMER:** NADRA accepts no responsibility for any error in the card if it is not attributable to office mistake.
+
+   h. SNICOP is valid for 10 years by paying US$ 20 or its equivalent according to the currency of respective country for Pakistanis living in 9 countries i.e. Iran, Libya, Syria, Yemen, Iraq, India, Nigeria, Nepal and Sudan, besides Gratis processing for all authorized staff posted in Pak Missions abroad.
+
+2. **STATUS/PURPOSE OF STAY ABROAD:** NICOP is issued to the following categories of Pakistani citizens. Applicants may tick mark or shade only one applicable category in the following order of preference:
+   a. Emigrant /employment abroad: A Pakistani citizen who is an "emigrant" as defined in the Emigration Ordinance 1979 who is required to register his foreign services agreement, contract or letter of employment with the Protector of Emigrants.
+   b. Dual Nationality Holder: A Pakistani citizen holding both Pakistani and Foreign citizenship/nationality with proof of such citizenship / nationality.
+   c. Resident/Immigrants Visa Holder: A Pakistani citizens holding a resident or immigrant visa or equivalent visa / authorization, permit or status of a foreign country.
+   d. Resident or Intending to Reside Abroad: Any Pakistani citizen residing or intend to reside abroad for a period exceeding six months and not falling in any of the categories defined in a, b and c above. Following persons are also included in this category.
+      I. Dependent: Dependents of emigrants / workers employed abroad / accompanying them abroad.
+      II. OPF Members: Members of OPF (Overseas Pakistanis Foundation) are also included in this category.
+      III. Others: All other persons proceeding or residing abroad for business, visit or any other purpose.
+
+3. **CLAIM FOR GRATIS NICOP:** Following persons are exempted from payment of fee for NICOP on producing satisfactory evidence of their status.
+   a. **Government Servants on Duty / Training Abroad:** Applicants who are in the service of Pakistan or in the service of local authority or a corporation owned or controlled by the Federal or Provincial Government and are proceeding abroad on Government duty or posting abroad or on duty or for employment with any international organization or for the Federal Government.
+   b. **Dependents of the above:** Dependent spouse, real children, parents, of persons specified in para "a" above who are accompanying them.
+
+4. **DOCUMENTS REQUIRED:**
+   a. Bank Receipt
+   b. Two Recent Photographs
+   c. Clear Photocopy of valid Pakistani Passport
+   d. Photocopy of valid Foreign Passport (for Dual National only)
+   e. Clear Photocopy of Pakistani B-Form/CRC / MNIC/CNIC/NICOP (if available)
+   f. Clear Photocopy of Spouse/Father /Mother/B- Form/CRC/NIC/CNIC/NICOP
+   g. Birth Certificate (For first time Registration only)
+   h. Marriage Certificate (For first time registration as married person)
+   i. Head NIC/CNIC/NICOP Card copy
+
+5. **INSTRUCTIONS ON INDIVIDUAL FIELDS:**
+   a. Type of application (Field 1): Applicant must tick mark **X** only one choice.
+   b. Names (Field 4,5,31,33,35 & 40 where applicable): if any of the names is larger than the space provided, you **MUST** abbreviate it appropriately as you would like it to appear on the card.
+   c. NIC/CNIC number (Field 6,11,32,34,36,38,42 & 59) where applicable): all numbers must be written without dashes, leave unused spaces **BLANK**.
+   d. Visible mark of ID (Field 15): Mark must be visible on face, hands or feet. Do not mention marks at places which are covered by clothes. Compress your wording into the space provided. Ionger description will be automatically **TRUNCATED** which might make it illegible.
+   e. Country of stay (Field 7): For names which are longer than the space provided, please use universally accepted acronyms / abbreviation e.g. Iran, Iraq, Syria etc.
+   f. Date of birth (Field 8): may be written as DD/MM/YYYY.
+   g. In field No. 24, 25, Place and country of issue of Pakistani / Foreign passport: Please indicate City and Country both.
+   h. Present Address (Field 44, 45, 46, 47 48) and Field 49 Permanent / Pakistani address (Field 51,52, 53 & 54): Please fill in complete address as you would like it to appear on the card. Abbreviate longer names appropriately so that they remain understandable. One Pakistani address is mandatory.
+   i. E-mail / Telephone / Mobile No, (Field 55, 56): Kindly mentioned all of these for better / swift customer services.
+   j. Filed 14: Applicant has to mention his own Blood Group in this column.
+   k. If Field 28 is yes then Field 29 is mandatory with Documentary Evidence.
+   l. Photo, Thumb or Signature: They **MUST** not exceed allotted space otherwise they will be truncated.
+   m. Character like *, @ / $ etc cannot be printed on card.
+   n. Financial: Fill out payment details in Field 60 and attach original deposit slip.
+   o. Reference detail (Field 39-43) - Mandatory Fields: Applicant must fill this column and provide CNIC/NICOP number of his / her Blood Relative. Blood Relative covers following relations (Real Father / Mother, Real Brother/Sister, Real Son/Daughter, Grand Father/Grand Mother).
+   p. Check box Field 3,10,12,17,18, 23 & 30 may be marked as **X**.
+   q. Field 59 verification declaration from 2 different persons must be CNIC / NICOP holder.
+   r. All Fingerprints are mandatory to be affixed in the "Applicant's finger impression " []" in (Field 56).
+
+6. **For Modification/Change in Already issued NICOP** Kindly highlight the field (s) which you want to modify (original) card is required to be surrendered).
